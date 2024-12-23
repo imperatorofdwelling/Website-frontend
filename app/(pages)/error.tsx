@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import EmptyState from '../../shared/ui/EmptyState'
+import EmptyState from '@/shared/ui/EmptyState'
 interface IError {
     error: Error
 }
