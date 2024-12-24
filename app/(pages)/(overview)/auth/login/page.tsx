@@ -6,13 +6,29 @@ import Button from '@/app/components/Button'
 import Auth0 from '@/app/components/Auth0'
 import Link from 'next/link'
 import AuthLogo from '@/public/images/login/auth_logo.png'
+import { useState } from 'react'
+import { useFormHandler } from '@/hooks/useAuth'
 
-interface SignInPageProps {}
+const SignInPage: React.FC = () => {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        confirmPassword: '',
+        name: '', // This can be removed in the login form
+    })
 
-const SignInPage: React.FC<SignInPageProps> = () => {
+    const { handleSubmit, errors, loading } = useFormHandler({
+        formData,
+        functionType: 'login',
+    })
+
+    const handleChange = (key: string, value: string) => {
+        setFormData((prev) => ({ ...prev, [key]: value }))
+    }
+
     const inputFields = [
-        { placeholder: 'Email', type: 'email' },
-        { placeholder: 'Password', type: 'password' },
+        { placeholder: 'Email', type: 'email', key: 'email' },
+        { placeholder: 'Password', type: 'password', key: 'password' },
     ]
 
     return (
@@ -27,7 +43,7 @@ const SignInPage: React.FC<SignInPageProps> = () => {
                         className="object-contain aspect-square"
                     />
                     <Link
-                        href={'/'}
+                        href="/"
                         className="text-[#1DA1F2] default-hover-active"
                     >
                         Skip
@@ -36,30 +52,42 @@ const SignInPage: React.FC<SignInPageProps> = () => {
                 <h1 className="mt-[104px] text-5xl font-bold text-white">
                     Sign In
                 </h1>
-                <form className="flex flex-col mt-6 w-full">
+                <form
+                    className="flex flex-col mt-6 w-full"
+                    onSubmit={handleSubmit}
+                >
                     {inputFields.map((field, index) => (
-                        <InputField
-                            key={index}
-                            placeholder={field.placeholder}
-                            type={field.type}
-
-                        />
+                        <div key={index}>
+                            <InputField
+                                placeholder={field.placeholder}
+                                type={field.type}
+                                error={errors[field.key] ? true : false}
+                                onChange={(e) =>
+                                    handleChange(field.key, e.target.value)
+                                }
+                            />
+                            {errors[field.key] && (
+                                <p className="text-red-500 text-sm mt-1 capitalize pl-4">
+                                    {errors[field.key]}
+                                </p>
+                            )}
+                        </div>
                     ))}
                     <Link
-                        href={'#'}
+                        href="#"
                         className="flex justify-end mt-3 text-blue-400 default-hover-active"
                     >
                         Forgot your password?
                     </Link>
-                    <Button text="Sign in" />
+                    <Button text={loading ? 'Signing In...' : 'Sign In'} disabled={loading}/>
                 </form>
                 <Auth0 />
                 <p className="self-start mt-6 text-sm text-center w-full">
                     <span className="text-stone-300">
-                        Don't have an account
+                        Don&apos;t have an account
                     </span>{' '}
                     <Link
-                        href={'/auth/register'}
+                        href="/auth/register"
                         className="font-medium text-sky-500"
                     >
                         Sign up
