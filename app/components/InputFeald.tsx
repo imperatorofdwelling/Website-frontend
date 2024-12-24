@@ -18,6 +18,7 @@ const InputField: React.FC<InputFieldProps> = ({
 }) => {
     // Manage input value with useState
     const [inputValue, setInputValue] = useState('')
+    const [inputFocused, setinputFocused] = useState(false)
 
     // Handle input change
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +36,10 @@ const InputField: React.FC<InputFieldProps> = ({
     const inputClass = clsx(
         'flex flex-col px-4 py-2 gap-1 w-full text-sm whitespace-nowrap rounded-lg bg-[#131313] ',
         {
-            'focus:border-[#FF453A] focus:ring-1 focus:ring-[#FF453A]': error, // Apply red color when error exists
+            'border border-[#006BE6]': inputFocused
+        },
+        {
+            'border border-[#FF453A]': error &&  inputFocused, // Apply red color when error exists
         },
     )
 
@@ -52,6 +56,8 @@ const InputField: React.FC<InputFieldProps> = ({
                     id={`input-${placeholder.toLowerCase()}`}
                     type={type}
                     placeholder={placeholder}
+                    onFocus={() => setinputFocused(true)}
+                    onBlur={() => setinputFocused(false)}
                     required
                     value={inputValue}
                     autoComplete="new-password" // Add autocomplete attribute
