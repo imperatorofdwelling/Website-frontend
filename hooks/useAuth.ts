@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { baseURL } from '@/app/helpers/axiosBaseUrl'
 import { FormData } from '@/app/types/InputFormType'
+import { cookies } from 'next/headers'
 
 type HandleSubmitParams = {
     formData: FormData
@@ -78,8 +79,7 @@ export const useFormHandler = ({
                 setErrors(mappedErrors)
             }
 
-
-            // I will change this If the backend guys fix it 
+            // I will change this If the backend guys fix it
             if (functionType === 'login') {
                 if (error.response?.status === 404) {
                     setErrors({ email: 'User with this email not found' })

@@ -1,9 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import InputField from '@/app/components/InputFeald'
-import Button from '@/app/components/Button'
-import Auth0 from '@/app/components/Auth0'
+import InputField from '@/app/components/auth/InputFeald'
+import Button from '@/app/components/auth/Button'
+import Auth0 from '@/app/components/auth/Auth0'
 import Link from 'next/link'
 import AuthLogo from '@/public/images/login/auth_logo.png'
 import { useState } from 'react'
@@ -32,7 +32,7 @@ const SignInPage: React.FC = () => {
     ]
 
     return (
-        <main className="flex overflow-hidden flex-col pb-3 pl-6 pr-6 mx-auto w-full max-w-[480px]">
+        <main className="w-full flex overflow-hidden flex-col pb-3">
             <section className="flex flex-col justify-center mt-10 w-full">
                 <div className="flex justify-between items-center">
                     <Image
@@ -67,7 +67,7 @@ const SignInPage: React.FC = () => {
                                 }
                             />
                             {errors[field.key] && (
-                                <p className="text-red-500 text-sm mt-1 capitalize pl-4">
+                                <p className="text-red text-sm mt-1 capitalize pl-4">
                                     {errors[field.key]}
                                 </p>
                             )}
