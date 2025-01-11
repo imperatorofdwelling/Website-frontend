@@ -52,7 +52,7 @@ export function SelectNumberOfResidents() {
                     <span>Residents</span>
                 </button>
             </DrawerTrigger>
-            <DrawerContent>
+            <DrawerContent >
                 <div className="mx-auto w-full max-w-[480px]">
                     <DrawerHeader>
                         <DrawerTitle>Number of residents</DrawerTitle>

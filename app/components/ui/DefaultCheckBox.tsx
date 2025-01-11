@@ -2,21 +2,24 @@ export default function DefaultCheckBox({
     name,
     value,
     checked = false,
-    onChange
+    onChange,
+    type = "radio",
 }: {
     name: string
     value: string
     checked?: boolean
+    type?: "checkbox" | "radio"
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }) {
     return (
-        <label className="flex items-center cursor-pointer relative">
+        <label className="inline-flex items-center cursor-pointer relative">
             <input
-                type="radio"
+                type={type}
                 name={name}
                 value={value}
                 defaultChecked={checked}
                 onChange={onChange}
+                required
                 className="peer h-6 w-6 cursor-pointer transition-all appearance-none rounded-[6px] shadow border-light_grey hover:shadow-md border checked:border-blue checked:bg-blue"
             />
             <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

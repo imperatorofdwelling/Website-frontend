@@ -83,3 +83,27 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+/* Pagination Container */
+.custom-swiper-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px; /* Space between bullets */
+  }
+
+  /* Pagination Bullet Default */
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+  }
+
+  /* Active Pagination Bullet */
+  .swiper-pagination-bullet-active {
+    background-color: blue;
+    opacity: 1;
+  }

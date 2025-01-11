@@ -32,6 +32,11 @@ function MenuItem({ isActive, defaultIcon, activeIcon, label }: any) {
 export default function BottomMenuBar() {
     const pathname = usePathname()
 
+    // Hide the bottom menu bar on the login and register pages
+    if (pathname === '/auth/login' || pathname === '/auth/register') {
+        return
+    }
+
     const menuItems = [
         {
             id: 'Home',
@@ -57,11 +62,11 @@ export default function BottomMenuBar() {
             activeIcon: <ProfileActiveIcon className="w-6 h-6" />,
             label: 'Profile',
         },
-        
+
     ]
 
     return (
-        <div className="mx-auto w-full max-w-[480px] fixed bottom-0 left-0 right-0 bg-black text-white shadow-lg flex justify-around py-3">
+        <div className="mx-auto w-full max-w-[480px] fixed z-50 bottom-0 left-0 right-0 bg-black text-white shadow-lg flex justify-around py-3">
             {menuItems.map((item) => {
                 // Determine if the current tab is active based on the pathname
                 const isActive =

@@ -1,19 +1,5 @@
+import { CityState, IResident } from '@/app/types/redux/homeCity/sliceType'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-interface IResident {
-    rooms: number
-    adults: number
-    children: number
-    babies: number
-    pests: number
-    typesOfPets: string
-}
-
-interface CityState {
-    typeDwelling: string
-    date: string
-    residents: IResident
-}
 
 const initialState: CityState = {
     typeDwelling: '',

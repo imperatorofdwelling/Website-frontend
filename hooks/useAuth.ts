@@ -2,7 +2,6 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { baseURL } from '@/app/helpers/axiosBaseUrl'
 import { FormData } from '@/app/types/InputFormType'
-import { cookies } from 'next/headers'
 
 type HandleSubmitParams = {
     formData: FormData
@@ -83,7 +82,7 @@ export const useFormHandler = ({
             if (functionType === 'login') {
                 if (error.response?.status === 404) {
                     setErrors({ email: 'User with this email not found' })
-                } else if (error.response?.status === 500) {
+                } else if (error.response?.status === 401) {
                     setErrors({ password: 'User password is not correct' })
                 }
             }

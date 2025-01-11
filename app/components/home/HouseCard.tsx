@@ -4,14 +4,35 @@ import StarIcon from '@/public/images/StarIcon.svg'
 import HotelIcon from '@/public/images/home/SelectionData/SelectionDataHotel.svg'
 import HouseImg from '@/public/images/home/house/houseImg.png'
 import LikeIcon from '@/public/images/home/house/Like.svg'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/swiper-bundle.css'
 
 export default function HouseCard() {
     return (
         <div>
-            <div className="mb-2 rounded-2xl relative">
-                <Image src={HouseImg} alt="House img" className="w-full" />
-                <button className="absolute top-4 right-4 cursor-pointer default-hover-active">
-                    <LikeIcon  />
+            <div className="relative mb-2 rounded-2xl">
+                <Swiper
+                    spaceBetween={10}
+                    slidesPerView={1}
+                    pagination={{
+                        clickable: true,
+                    }}
+                >
+                    {[...Array(3)].map((_, index) => (
+                        <SwiperSlide key={index}>
+                            <Image
+                                src={HouseImg}
+                                alt="House img"
+                                className="w-full"
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+                <button
+                    className="absolute top-4 right-4 z-40 cursor-pointer default-hover-active"
+                    aria-label="Like this house"
+                >
+                    <LikeIcon />
                 </button>
             </div>
 
