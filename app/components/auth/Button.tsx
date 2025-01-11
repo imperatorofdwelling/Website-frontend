@@ -7,7 +7,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ text, disabled }) => {
     const buttonClassName = clsx(
-        'gap-2.5 self-stretch px-4 py-4 w-full text-base font-semibold text-white bg-blue-600 rounded-lg min-h-[56px] default-hover-active',
+        'gap-2.5 self-stretch px-4 py-4 w-full text-base font-semibold text-white bg-blue rounded-lg min-h-[56px] default-hover-active',
         {
             'cursor-not-allowed': disabled,
         },

@@ -1,8 +1,12 @@
 'use client'
 
-import { DrawerDemo } from './components/ui/Modal'
+import { SelectTypeOfDwellingModal } from './components/home/modals/SelectTypeOfDwelling'
+import { SelectNumberOfResidents } from './components/home/modals/SelectNumberOfResidents'
+import SelectYouAreBookingFor from './components/home/modals/SelectYouAreBookingFor'
+import HouseCard from './components/home/HouseCard'
 
 export default function Home() {
+
     return (
         <div>
             <div className="flex gap-6 border-b-[1px] border-border_color_grey pb-4 mb-6">
@@ -89,15 +93,29 @@ export default function Home() {
                 </button>
             </div>
 
-            <div>
+            <div className="mb-6">
                 <h2 className="text-lg mb-3">Enter selection data</h2>
-                <DrawerDemo />
+                <SelectTypeOfDwellingModal />
+                <SelectYouAreBookingFor />
+                <SelectNumberOfResidents />
 
                 <button className="gap-2.5 self-stretch px-4 py-4 w-full text-base font-semibold text-white bg-blue rounded-lg min-h-[56px] default-hover-active">
                     Apply
                 </button>
             </div>
             {/* {first && <SearchCity onClose={() => setfirst(false)} />} */}
+
+            <main className="">
+                <h2 className="mb-4 text-lg font-medium">Featured</h2>
+
+                <HouseCard />
+                <HouseCard />
+                <HouseCard />
+                <HouseCard />
+                <HouseCard />
+                <HouseCard />
+                <HouseCard />
+            </main>
         </div>
     )
 }
