@@ -8,7 +8,7 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from '@/src/shared/ui/shad-cn/drawer'
+} from '@/src/shared/ui/ShadCn/drawer'
 import ResidentsIcon from '@/public/images/home/SelectionData/SelectionDataResidentsIcon.svg'
 import MinusIcon from '@/public/images/home/NumberOfResidents/NumberOfResidentsMinus.svg'
 import PlusIcon from '@/public/images/home/NumberOfResidents/NumberOfResidentsPlus.svg'

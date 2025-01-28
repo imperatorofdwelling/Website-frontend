@@ -4,18 +4,12 @@ import StarIcon from '@/public/images/StarIcon.svg'
 import HotelIcon from '@/public/images/home/SelectionData/SelectionDataHotel.svg'
 import HouseImg from '@/public/images/home/house/houseImg.png'
 import LikeIcon from '@/public/images/home/house/Like.svg'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import Link from 'next/link'
-import { Button } from '../../shared/ui/shad-cn/button'
+import { Button } from '@/src/shared/ui/ShadCn/button'
 
 export default function HouseCard() {
-    const handelBtn = (e: any) => {
-        e.stopPropagation()
-        // OR
-        e.preventDefault()
-    }
-
     return (
         <Link href={`/house/${1}`}>
             <div className="relative mb-2 rounded-2xl">
@@ -40,7 +34,7 @@ export default function HouseCard() {
                 <Button
                     variant={'none'}
                     size={'icon'}
-                    onClick={handelBtn}
+                    onClick={(e) => e.stopPropagation()}
                     className="absolute top-4 w-7 h-7 right-4 z-50 cursor-pointer default-hover-active"
                     aria-label="Like this house"
                 >

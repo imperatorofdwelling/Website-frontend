@@ -1,9 +1,9 @@
 'use client'
 
-import SelectTypeOfDwellingModal from '@/src/app/components/modals/SelectTypeOfDwelling'
-import SelectNumberOfResidents from '@/src/app/components/modals/SelectNumberOfResidents'
-import SelectYouAreBookingFor from '@/src/app/components/modals/SelectYouAreBookingFor'
-import HouseCard from '@/src/app/components/HouseCard'
+import SelectTypeOfDwellingModal from '@/src/shared/ui/home/SelectTypeOfDwelling/SelectTypeOfDwelling'
+import SelectNumberOfResidents from '@/src/shared/ui/home/SelectNumberOfResidents/SelectNumberOfResidents'
+import SelectYouAreBookingFor from '@/src/shared/ui/home/SelectYouAreBookingFor/SelectYouAreBookingFor'
+import HouseCard from '@/src/shared/ui/home/HouseCard/HouseCard'
 
 export default function Home() {
     return (

@@ -8,9 +8,10 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from '@/src/shared/ui/shad-cn/drawer'
+} from '@/src/shared/ui/ShadCn/drawer'
 import DateIcon from '@/public/images/home/SelectionData/SelectionDataDateIcon.svg'
-import { Calendar, DateRange } from '@/src/shared/ui/shad-cn/calendar' // Ensure your Calendar supports DateRange
+import { Calendar } from '@/src/shared/ui/ShadCn/calendar' // Ensure your Calendar supports DateRange
+import { DateRange } from 'react-day-picker'
 
 export default function SelectYouAreBookingFor() {
     const [selectedRange, setSelectedRange] = React.useState<DateRange | undefined>(undefined)
