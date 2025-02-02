@@ -3,7 +3,7 @@
 import { City } from '@/src/shared/types/cityType'
 import useGetLocations from '@/src/shared/hooks/useGetLocations'
 import { useCallback, useState, useEffect } from 'react'
-import SelectCity from './SelectCity'
+import SelectCity from '@/src/shared/ui/home/SearchCity/SelectCity'
 
 interface SearchCityProps {
     onClose: () => void

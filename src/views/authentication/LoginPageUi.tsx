@@ -1,16 +1,18 @@
-'use client'
+"use client"
 
 import Image from 'next/image'
-import InputField from '@/components/auth/InputFeald'
-import Button from '@/components/auth/Button'
-import OAuth from '@/components/auth/OAuth'
+import GoogleLogo from '@/public/images/login/googleLogo.svg'
+import TwitterLogo from '@/public/images/login/twitterLogo.svg'
+
 import Link from 'next/link'
 import AuthLogo from '@/public/images/login/auth_logo.png'
 import { useState } from 'react'
 import { useFormHandler } from '@/src/shared/hooks/useAuth'
-import DefaultCheckBox from '@/src/shared/ui/components/DefaultCheckBox'
+import DefaultCheckBox from '@/src/shared/ui/authentication/CheckBox/DefaultCheckBox'
+import InputField from '@/src/shared/ui/authentication/InputFeald/InputFeald'
+import Button from '@/src/shared/ui/Button/Button'
 
-const SignInPage: React.FC = () => {
+export function LoginPageUi() {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -82,7 +84,7 @@ const SignInPage: React.FC = () => {
                     className="flex flex-col mt-6 w-full"
                     onSubmit={handleSubmit}
                 >
-                    <div className='mb-5'>
+                    <div className="mb-5">
                         {inputFields.map((field, index) => (
                             <div key={index}>
                                 <InputField
@@ -112,7 +114,10 @@ const SignInPage: React.FC = () => {
 
                         <p className="text-sm text-[#666666] ">
                             I read and agree to{' '}
-                            <Link href={'#'} className="text-blue font-medium default-hover-active">
+                            <Link
+                                href={'#'}
+                                className="text-blue font-medium default-hover-active"
+                            >
                                 Terms and Conditions
                             </Link>
                         </p>
@@ -122,13 +127,21 @@ const SignInPage: React.FC = () => {
                         disabled={loading}
                     />
                 </form>
-                <OAuth />
+                <div className="flex gap-2 justify-center items-center mt-6 w-full text-xs leading-none text-center text-white whitespace-nowrap">
+                    <Link href={'#'} className="default-hover-active">
+                        <GoogleLogo />
+                    </Link>
+                    <span className="self-stretch my-auto text-sm">Or</span>
+                    <Link href={'#'} className="default-hover-active">
+                        <TwitterLogo />
+                    </Link>
+                </div>
                 <p className="self-start mt-6 text-sm text-center w-full">
                     <span className="text-stone-300">
                         Don&apos;t have an account
                     </span>{' '}
                     <Link
-                        href="/auth/register"
+                        href="/registration"
                         className="font-medium text-sky-500"
                     >
                         Sign up
@@ -138,5 +151,3 @@ const SignInPage: React.FC = () => {
         </main>
     )
 }
-
-export default SignInPage

@@ -40,31 +40,31 @@ export default function BottomMenuBar() {
     const pathname = usePathname()
 
     // Hide the bottom menu bar on the login and register pages
-    if (pathname === '/auth/login' || pathname === '/auth/register') {
+    if (pathname === '/login' || pathname === '/registration') {
         return
     }
 
     const menuItems = [
         {
-            id: 'Home',
+            id: 1,
             defaultIcon: <HomeDefaultIcon className="w-6 h-6" />,
             activeIcon: <HomeActiveIcon className="w-6 h-6" />,
             label: 'Home',
         },
         {
-            id: 'Favorites',
+            id: 2,
             defaultIcon: <FavoritesDefaultIcon className="w-6 h-6" />,
             activeIcon: <FavoritesActiveIcon className="w-6 h-6" />,
             label: 'Favorites',
         },
         {
-            id: 'Messages',
+            id: 3,
             defaultIcon: <MessageDefaultIcon className="w-6 h-6" />,
             activeIcon: <MessageActiveIcon className="w-6 h-6" />,
             label: 'Messages',
         },
         {
-            id: 'Profile',
+            id: 4,
             defaultIcon: <ProfileDefaultIcon className="w-6 h-6" />,
             activeIcon: <ProfileActiveIcon className="w-6 h-6" />,
             label: 'Profile',
@@ -72,23 +72,25 @@ export default function BottomMenuBar() {
     ]
 
     return (
-        <div className="mx-auto w-full max-w-[480px] fixed z-50 bottom-0 left-0 right-0 bg-black text-white shadow-lg flex justify-around py-3">
-            {menuItems.map((item) => {
-                // Determine if the current tab is active based on the pathname
-                const isActive =
-                    pathname === `/${item.label.toLowerCase()}` ||
-                    (pathname === '/' && item.label === 'Home')
+        <div className='fixed z-50 bottom-0 left-0 right-0 bg-black '>
+            <div className="mx-auto w-full max-w-[480px] text-white shadow-lg flex justify-around py-3">
+                {menuItems.map((item) => {
+                    // Determine if the current tab is active based on the pathname
+                    const isActive =
+                        pathname === `/${item.label.toLowerCase()}` ||
+                        (pathname === '/' && item.label === 'Home')
 
-                return (
-                    <MenuItem
-                        key={item.id}
-                        isActive={isActive}
-                        defaultIcon={item.defaultIcon}
-                        activeIcon={item.activeIcon}
-                        label={item.label}
-                    />
-                )
-            })}
+                    return (
+                        <MenuItem
+                            key={item.id}
+                            isActive={isActive}
+                            defaultIcon={item.defaultIcon}
+                            activeIcon={item.activeIcon}
+                            label={item.label}
+                        />
+                    )
+                })}
+            </div>
         </div>
     )
 }

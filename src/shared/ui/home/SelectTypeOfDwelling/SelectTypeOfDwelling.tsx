@@ -8,11 +8,11 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from '@/src/shared/ui/shad-cn/drawer'
+} from '@/src/shared/ui/ShadCn/drawer'
 import HouseIcon from '@/public/images/home/SelectionData/SelectionDataHouseIcon.svg'
 import HotelIcon from '@/public/images/home/SelectionData/SelectionDataHotel.svg'
 import ApartmentIcon from '@/public/images/home/SelectionData/SelectionDataApartment.svg'
-import DefaultCheckBox from '../../../shared/ui/components/DefaultCheckBox'
+import DefaultCheckBox from '../../authentication/CheckBox/DefaultCheckBox'
 
 const dwellingOptions = [
     { label: 'House', icon: HouseIcon, value: 'house', checked: true },

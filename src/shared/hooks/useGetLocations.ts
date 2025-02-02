@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { baseURL } from '@/app/helpers/axiosBaseUrl'
+import { useState, useEffect } from 'react'
+import { baseURL } from '@/src/shared/helpers/axiosBaseUrl'
 import { City } from '@/src/shared/types/cityType'
 
 

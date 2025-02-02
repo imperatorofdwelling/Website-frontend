@@ -1,17 +1,24 @@
 'use client'
 
 import Image from 'next/image'
-import InputField from '@/components/auth/InputFeald'
-import Button from '@/components/auth/Button'
-import OAuth from '@/components/auth/OAuth'
+
 import Link from 'next/link'
 import AuthLogo from '@/public/images/login/auth_logo.png'
+
+
 import { useState } from 'react'
 import { FormData } from '@/src/shared/types/InputFormType'
 import { useFormHandler } from '@/src/shared/hooks/useAuth'
-import DefaultCheckBox from '@/src/shared/ui/components/DefaultCheckBox'
 
-const SignUpPage: React.FC = () => {
+import DefaultCheckBox from '@/src/shared/ui/authentication/CheckBox/DefaultCheckBox'
+
+
+import GoogleLogo from '@/public/images/login/googleLogo.svg'
+import TwitterLogo from '@/public/images/login/twitterLogo.svg'
+import InputField from '@/src/shared/ui/authentication/InputFeald/InputFeald'
+import Button from '@/src/shared/ui/Button/Button'
+
+export function RegistrationPageUi() {
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -96,7 +103,7 @@ const SignUpPage: React.FC = () => {
                     className="flex flex-col mt-6 w-full"
                     onSubmit={handleSubmit}
                 >
-                    <div className='mb-5'>
+                    <div className="mb-5">
                         {inputFields.map((field) => (
                             <div key={field.key}>
                                 <InputField
@@ -128,7 +135,10 @@ const SignUpPage: React.FC = () => {
 
                         <p className="text-sm text-[#666666] ">
                             I read and agree to{' '}
-                            <Link href={'#'} className="text-blue font-medium default-hover-active">
+                            <Link
+                                href={'#'}
+                                className="text-blue font-medium default-hover-active"
+                            >
                                 Terms and Conditions
                             </Link>
                         </p>
@@ -140,7 +150,15 @@ const SignUpPage: React.FC = () => {
                 </form>
 
                 {/* Social Auth Section */}
-                <OAuth />
+                <div className="flex gap-2 justify-center items-center mt-6 w-full text-xs leading-none text-center text-white whitespace-nowrap">
+                    <Link href={'#'} className="default-hover-active">
+                        <GoogleLogo />
+                    </Link>
+                    <span className="self-stretch my-auto text-sm">Or</span>
+                    <Link href={'#'} className="default-hover-active">
+                        <TwitterLogo />
+                    </Link>
+                </div>
 
                 {/* Footer */}
                 <p className="self-start mt-6 text-sm text-center w-full">
@@ -148,7 +166,7 @@ const SignUpPage: React.FC = () => {
                         Already have an Account?
                     </span>{' '}
                     <Link
-                        href="/auth/login"
+                        href="/login"
                         className="font-medium text-sky-500"
                     >
                         Sign in
@@ -158,5 +176,3 @@ const SignUpPage: React.FC = () => {
         </main>
     )
 }
-
-export default SignUpPage
