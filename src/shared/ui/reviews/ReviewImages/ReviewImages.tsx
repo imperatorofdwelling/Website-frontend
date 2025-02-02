@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import { Pagination } from 'swiper/modules'
-import { SelectedPhotoCardModal } from './modals/SelectedPhotoCardModal'
-import { Header } from '@/shared/ui/Header'
+import { Header } from '@/src/shared/ui/components/Header'
 import Image from 'next/image'
+import { SelectedPhotoCardModal } from '@/src/shared/ui/reviews/SelectedPhotoCardModal/SelectedPhotoCardModal'
+
 interface ReviewImagesProps {
     images: string[]
 }
 
-export const ReviewImages: React.FC<ReviewImagesProps> = ({ images }) => {
+export const ReviewImages = ({ images }: ReviewImagesProps) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
     const openModal = (index: number) => {

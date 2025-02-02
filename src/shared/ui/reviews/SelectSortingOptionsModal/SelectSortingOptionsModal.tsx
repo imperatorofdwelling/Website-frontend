@@ -1,6 +1,6 @@
 'use client'
-
-import * as React from 'react'
+import FilterIcon from '@/public/images/SvgIcons/FilterIcon.svg'
+import DefaultRadioButton from '@/src/shared/ui/components/DefaultRadioButton'
 import {
     Drawer,
     DrawerContent,
@@ -8,8 +8,7 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from '@/components/ui/drawer'
-import DefaultRadioButton from '../../ui/DefaultRadioButton'
+} from '@/src/shared/ui/ShadCn/drawer'
 
 const sortingOptions = [
     { label: 'Old ones', value: 'old' },
@@ -53,21 +52,7 @@ export function SelectSortingOptionsModal() {
                     className="bg-grey border border-border_color_grey rounded-lg flex items-center h-full py-1 px-2 relative default-hover-active"
                     type="button"
                 >
-                    <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M16 18V6M16 6L20 10.125M16 6L12 10.125M8 6V18M8 18L12 13.875M8 18L4 13.875"
-                            stroke="white"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
+                    <FilterIcon />
                     <h4 className="ml-2 font-normal">Old ones</h4>
                 </button>
             </DrawerTrigger>

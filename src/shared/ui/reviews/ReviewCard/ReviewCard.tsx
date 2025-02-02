@@ -1,8 +1,7 @@
-import React from 'react'
-import { ReviewImages } from './ReviewImages'
-import { StarRating } from './ui/StarRating'
+import { StarRating } from '../StarRating/StarRating'
 import BedroomImg from '@/public/images/reviews/bedroom.png'
 import Image from 'next/image'
+import { ReviewImages } from '../ReviewImages/ReviewImages'
 
 interface Review {
     id: number
@@ -17,7 +16,7 @@ interface ReviewCardProps {
     review: Review
 }
 
-export const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
+export const ReviewCard = ({ review }: ReviewCardProps) => {
     return (
         <div className="py-6 px-4 mb-3 bg-grey border border-border_color_grey rounded-lg w-full">
             <div className="flex justify-between mb-4">

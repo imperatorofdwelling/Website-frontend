@@ -1,10 +1,8 @@
-import React from 'react'
-
 interface StarRatingProps {
     rating: number
 }
 
-export const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
+export const StarRating = ({ rating }: StarRatingProps) => {
     return (
         <div className="flex gap-1">
             {Array.from({ length: rating }).map((_, i) => (
