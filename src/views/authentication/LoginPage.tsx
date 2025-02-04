@@ -25,7 +25,7 @@ export function LoginPageUi() {
 
     const { handleSubmit, errors, loading } = useFormHandler({
         formData,
-        functionType: 'login',
+        endpoint: 'login',
     })
 
     const handleChange = (key: string, value: string) => {

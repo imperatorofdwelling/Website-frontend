@@ -12,7 +12,7 @@ import { Button } from '@/src/shared/ui/ShadCn/button'
 export default function HouseCard() {
     return (
         <Link href={`/house/${1}`}>
-            <div className="relative mb-2 rounded-2xl">
+            <div className="relative mb-2 rounded-2xl z-10">
                 <Swiper
                     spaceBetween={10}
                     slidesPerView={1}

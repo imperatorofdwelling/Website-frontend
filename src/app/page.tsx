@@ -109,7 +109,7 @@ export default function Home() {
             <main>
                 <h2 className="mb-4 text-lg font-medium">Featured</h2>
 
-                <div className='grid grid-cols-1'>
+                <div className='grid grid-cols-1 gap-y-2'>
                     {[...Array(3)].map((_, index) => (
                         <HouseCard key={index}/>
                     ))}

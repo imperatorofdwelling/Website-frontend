@@ -1,1 +1,1 @@
-export { LoginPageUi as default } from '@/src/views/authentication/LoginPageUi'
+export { LoginPageUi as default } from '@/src/views/authentication/LoginPage'
