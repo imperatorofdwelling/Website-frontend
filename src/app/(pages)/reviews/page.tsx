@@ -16,7 +16,7 @@ export default function ReviewsPage() {
 
     return (
         <div className='text-white min-h-screen'>
-            <Header title="All Reviews" leftIcon />
+            <Header title="All Reviews" back />
             <ReviewsSearch onSearch={setSearchParams} />
 
             <main className='flex flex-col gap-4'>

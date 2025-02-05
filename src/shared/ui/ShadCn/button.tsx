@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/src/shared/lib/utils"
+import { cn } from "@/src/shared/utils/utils"
 
 const buttonVariants = cva(
   "inline-flex justify-center items-center default-hover-active",

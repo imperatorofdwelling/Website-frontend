@@ -55,7 +55,7 @@ export const ReviewImages = ({ images }: ReviewImagesProps) => {
                     title={`Photo ${selectedImageIndex + 1} of ${
                         images.length
                     }`}
-                    leftIcon
+                    back
                     onClick={toggleModal}
                 />
                 <Swiper

@@ -1,11 +1,11 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { baseURL } from '@/src/shared/helpers/axiosBaseUrl'
-import { FormData } from '@/src/shared/types/InputFormType'     
+import { BASE_URL, HTTPError } from '@/src/shared/utils/ky'
+import { FormData } from '@/src/shared/types/InputFormType'
 
 type HandleSubmitParams = {
     formData: FormData
-    functionType: 'login' | 'register'
+    endpoint: 'login' | 'registration'
 }
 
 type UseFormHandler = {
@@ -14,23 +14,32 @@ type UseFormHandler = {
     loading: boolean
 }
 
+const ERROR_MESSAGES = {
+    NETWORK: 'An unexpected error occurred. Please check your connection.',
+    PARSE: 'Failed to process server response.',
+    DEFAULT: 'An error occurred. Please try again.',
+    CONFIRM_PASSWORD: 'Passwords do not match',
+    USER_EXISTS: 'User with this email already exists',
+    USER_NOT_FOUND: 'User with this email not found',
+    WRONG_PASSWORD: 'User password is not correct',
+}
+
 export const useFormHandler = ({
     formData,
-    functionType,
+    endpoint,
 }: HandleSubmitParams): UseFormHandler => {
     const router = useRouter()
     const [errors, setErrors] = useState<Record<string, string>>({})
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState<boolean>(false)
 
     const validateForm = (): Record<string, string> => {
-        const validationErrors: Record<string, string> = {}
         if (
-            functionType === 'register' &&
+            endpoint === 'registration' &&
             formData.password !== formData.confirmPassword
         ) {
-            validationErrors.confirmPassword = 'Passwords do not match'
+            return { confirmPassword: ERROR_MESSAGES.CONFIRM_PASSWORD }
         }
-        return validationErrors
+        return {}
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -45,47 +54,69 @@ export const useFormHandler = ({
             return
         }
 
-        const payload =
-            functionType === 'register'
-                ? {
-                      name: formData.name,
-                      email: formData.email,
-                      password: formData.password,
-                      isHashed: true,
-                  }
-                : {
-                      email: formData.email,
-                      password: formData.password,
-                      isHashed: true,
-                  }
-
-        const endpoint =
-            functionType === 'register' ? '/registration' : '/login'
-
         try {
-            await baseURL.post(endpoint, payload)
+            const requestBody = {
+                ...(endpoint === 'registration' && { name: formData.name }),
+                email: formData.email,
+                password: formData.password,
+                isHashed: true,
+            }
+
+            const response = await BASE_URL.post(endpoint, {
+                json: requestBody,
+            }).json()
+
+            localStorage.setItem('user', JSON.stringify(response))
             router.push('/')
-        } catch (error: any) {
-            if (error.response?.status === 400) {
-                const apiErrors = error.response.data.error
-                console.log(apiErrors)
+        } catch (error) {
+            let apiErrors: Record<string, string> = {}
 
-                const mappedErrors =
-                    apiErrors === 'user already exists'
-                        ? { email: 'User with this email already exists' }
-                        : { ...apiErrors }
-
-                setErrors(mappedErrors)
+            const isHTTPError = (err: unknown): err is HTTPError => {
+                return err instanceof Error && 'response' in err
             }
 
-            // I will change this If the backend guys fix it
-            if (functionType === 'login') {
-                if (error.response?.status === 404) {
-                    setErrors({ email: 'User with this email not found' })
-                } else if (error.response?.status === 401) {
-                    setErrors({ password: 'User password is not correct' })
+            if (isHTTPError(error)) {
+                try {
+                    const responseBody = (await error.response.json()) as {
+                        error?: string | Record<string, string>
+                    }
+                    const status = error.response.status
+
+                    switch (status) {
+                        case 400:
+                            if (typeof responseBody.error === 'object') {
+                                // Handle nested validation errors
+                                apiErrors = { ...responseBody.error }
+                            } else if (
+                                responseBody.error === 'user already exists'
+                            ) {
+                                apiErrors.email = ERROR_MESSAGES.USER_EXISTS
+                            }
+                            break
+                        case 401:
+                            if (endpoint === 'login') {
+                                apiErrors.password =
+                                    ERROR_MESSAGES.WRONG_PASSWORD
+                            }
+                            break
+                        case 404:
+                            if (endpoint === 'login') {
+                                apiErrors.email = ERROR_MESSAGES.USER_NOT_FOUND
+                            }
+                            break
+                        default:
+                            apiErrors.general = ERROR_MESSAGES.DEFAULT
+                    }
+                } catch (parseError) {
+                    apiErrors.general = ERROR_MESSAGES.PARSE
                 }
+            } else if (error instanceof Error) {
+                apiErrors.general = error.message || ERROR_MESSAGES.DEFAULT
+            } else {
+                apiErrors.general = ERROR_MESSAGES.NETWORK
             }
+
+            setErrors(apiErrors)
         } finally {
             setLoading(false)
         }

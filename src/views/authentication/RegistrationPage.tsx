@@ -5,13 +5,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import AuthLogo from '@/public/images/login/auth_logo.png'
 
-
 import { useState } from 'react'
 import { FormData } from '@/src/shared/types/InputFormType'
 import { useFormHandler } from '@/src/shared/hooks/useAuth'
 
 import DefaultCheckBox from '@/src/shared/ui/authentication/CheckBox/DefaultCheckBox'
-
 
 import GoogleLogo from '@/public/images/login/googleLogo.svg'
 import TwitterLogo from '@/public/images/login/twitterLogo.svg'
@@ -32,7 +30,7 @@ export function RegistrationPageUi() {
 
     const { handleSubmit, errors, loading } = useFormHandler({
         formData,
-        functionType: 'register',
+        endpoint: 'registration',
     })
 
     const handleChange = (key: string, value: string) => {
@@ -165,10 +163,7 @@ export function RegistrationPageUi() {
                     <span className="text-stone-300">
                         Already have an Account?
                     </span>{' '}
-                    <Link
-                        href="/login"
-                        className="font-medium text-sky-500"
-                    >
+                    <Link href="/login" className="font-medium text-sky-500">
                         Sign in
                     </Link>
                 </p>

@@ -1,33 +1,104 @@
-import { useState, useEffect } from 'react'
-import { baseURL } from '@/src/shared/helpers/axiosBaseUrl'
-import { City } from '@/src/shared/types/cityType'
+import { useState, useEffect, useMemo } from 'react';
+import { BASE_URL, HTTPError } from '@/src/shared/utils/ky';
+import { City } from '@/src/shared/types/cityType';
 
+const CACHE_KEY = 'cities_cache';
+const CACHE_TTL = 15 * 60 * 1000; // 15 minutes cache
 
 const useGetLocations = () => {
-    const [city, setCity] = useState<City[]>([])
-    const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState<string | null>(null)
+    const [state, setState] = useState<{
+        cities: City[];
+        loading: boolean;
+        error: string | null;
+    }>({
+        cities: [],
+        loading: true,
+        error: null,
+    });
 
     useEffect(() => {
-        async function getCityNames() {
-            setLoading(true)
-            setError(null)
+        const abortController = new AbortController();
+
+        const fetchCities = async () => {
             try {
-                const response = await baseURL.get('/locations')
-                if (response.data) {
-                    setCity(response.data.data)
+                // Check cache first
+                const cachedData = localStorage.getItem(CACHE_KEY);
+                const cachedTime = localStorage.getItem(`${CACHE_KEY}_time`);
+
+                if (
+                    cachedData &&
+                    cachedTime &&
+                    Date.now() - Number(cachedTime) < CACHE_TTL
+                ) {
+                    setState((prev) => ({
+                        ...prev,
+                        cities: JSON.parse(cachedData),
+                        loading: false,
+                    }));
+                    return;
                 }
+
+                const data: City[] = await BASE_URL.get('locations', {
+                    signal: abortController.signal,
+                }).json();
+
+                // Update cache
+                localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+                localStorage.setItem(`${CACHE_KEY}_time`, Date.now().toString());
+
+                setState((prev) => ({
+                    ...prev,
+                    cities: data,
+                    loading: false,
+                }));
             } catch (error) {
-                setError('Failed to fetch city names')
-            } finally {
-                setLoading(false)
+                if (abortController.signal.aborted) return;
+
+                let errorMessage = 'Failed to fetch city names';
+
+                // Enhanced error type checking
+                if (error instanceof Error) {
+                    if ('response' in error) {
+                        // Handle HTTPError
+                        const httpError = error as HTTPError;
+                        try {
+                            const errorData = await httpError.response.json();
+                            errorMessage = errorData.message || errorMessage;
+                        } catch {
+                            errorMessage = 'Failed to parse error response';
+                        }
+                    } else {
+                        // Handle other Error types
+                        errorMessage = error.message;
+                    }
+                } else {
+                    // Handle non-Error throwables
+                    errorMessage = 'Unknown error occurred';
+                }
+
+                setState((prev) => ({
+                    ...prev,
+                    error: errorMessage,
+                    loading: false,
+                }));
             }
-        }
+        };
 
-        getCityNames()
-    }, [])
+        fetchCities();
 
-    return { city, loading, error }
-}
+        return () => {
+            abortController.abort();
+        };
+    }, []);
 
-export default useGetLocations
+    return useMemo(
+        () => ({
+            cities: state.cities,
+            loading: state.loading,
+            error: state.error,
+        }),
+        [state.cities, state.loading, state.error]
+    );
+};
+
+export default useGetLocations;
