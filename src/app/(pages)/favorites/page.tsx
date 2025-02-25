@@ -1,0 +1,1 @@
+export {FavoritesPageUi as default} from '@/src/views/favorites/FavoritesPage'
