@@ -1,0 +1,1 @@
+export {BookingCancellationPageUi as default} from '@/src/views/checkout/BookingcancellationPage'

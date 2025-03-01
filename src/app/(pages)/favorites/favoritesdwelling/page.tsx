@@ -1,0 +1,1 @@
+export {FavoritesDwellingPageUi as default} from '@/src/views/favorites/favoritesdwelling/FavoritesDwellingPage'
