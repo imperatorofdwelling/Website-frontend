@@ -5,7 +5,18 @@ import { useRouter } from 'next/navigation'
 import ActiveStarIcon from '@/public/images/SvgIcons/ActiveStarIcon.svg'
 import DeleteIcon from '@/public/images/SvgIcons/DeleteIcon.svg'
 
-export function SavedCards({ favoritePlaces }: any) {
+interface FavoritePlace {
+    id: string
+    name: string
+    options: number
+    isDeleted: boolean
+}
+
+interface SavedCardsProps {
+    favoritePlaces: FavoritePlace[]
+}
+
+export function SavedCards({ favoritePlaces }: SavedCardsProps) {
     const router = useRouter()
 
     const handleCardClick = (isDeleted: boolean) => {

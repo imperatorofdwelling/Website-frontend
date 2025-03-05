@@ -9,12 +9,13 @@ import Image from 'next/image'
 import messageicon from '@/public/images/confirmation/messageicon.png'
 import RightArrowIcon from '@/public/images/SvgIcons/RightArrowIcon.svg'
 import CheckOutConfirmPopup from '@/src/shared/ui/confirmation/CheckOut/CheckOutConfirmPopup/CheckOutConfirmPopup'
+
 export function CheckOutPageUi() {
     return (
         <div className='text-white min-h-screen'>
             <Header back title='Confirm check-out' />
             <main className='flex flex-col gap-4'>
-                <div className=' w-full '>
+                <div className='w-full'>
                     <HotelFeatureCard />
                 </div>
                 <div>
@@ -36,17 +37,17 @@ export function CheckOutPageUi() {
                         </h3>
                     </div>
 
-                    <div className='flex flex-col gap-1 py-2 '>
+                    <div className='flex flex-col gap-1 py-2'>
                         <h3 className='text-lg'>Rental conditions</h3>
-                        <h3 className=' text-light_grey text-sm'>
+                        <h3 className='text-light_grey text-sm'>
                             Price for the rental period: 2160₽
                         </h3>
                     </div>
 
-                    <div className='flex flex-col gap-1 py-2 border-b  border-[#1F1F1F]  w-full'></div>
+                    <div className='flex flex-col gap-1 py-2 border-b border-[#1F1F1F] w-full'></div>
 
                     <div className='flex justify-between items-start'>
-                        <div className='flex flex-col gap-1 mt-3 py-2 '>
+                        <div className='flex flex-col gap-1 mt-3 py-2'>
                             <h3 className='text-lg'>
                                 Information about the landlord
                             </h3>
@@ -60,30 +61,26 @@ export function CheckOutPageUi() {
                                 E-mail: privetmedved@gmail.com
                             </h3>
                         </div>
-                        <div className='flex flex-col items-center justify-center my-3  gap-[6px] bg-[#131313] w-[48px] h-[48px] mt-6 border border-[#1B1B1C] rounded-lg'>
+                        <div className='flex flex-col items-center justify-center my-3 gap-[6px] bg-[#131313] w-[48px] h-[48px] mt-6 border border-[#1B1B1C] rounded-lg'>
                             <Image src={messageicon} alt='messageicon' />
                         </div>
                     </div>
 
-
                     <div className='flex justify-between items-start'>
-                        <div className='flex flex-col gap-1 mt-3 py-2 '>
-                            <h3 className='text-lg'>
-                            Owner's rules
+                        <div className='flex flex-col gap-1 mt-3 py-2'>
+                            <h3 className='text-lg'>Owner&apos;s rules</h3>
+                            <h3 className='text-light_grey text-sm'>
+                                Check-in: 11:00-20:00
                             </h3>
                             <h3 className='text-light_grey text-sm'>
-                            Check-in: 11:00-20:00
-                            </h3>
-                            <h3 className='text-light_grey text-sm'>
-                            Check-out: 14:00-16:00
+                                Check-out: 14:00-16:00
                             </h3>
                         </div>
-                        <div className='flex flex-col items-center justify-center my-3  gap-[6px] bg-[#131313] w-[48px] h-[48px] mt-6 border border-[#1B1B1C] rounded-lg'>
-                           <RightArrowIcon/>
+                        <div className='flex flex-col items-center justify-center my-3 gap-[6px] bg-[#131313] w-[48px] h-[48px] mt-6 border border-[#1B1B1C] rounded-lg'>
+                            <RightArrowIcon />
                         </div>
                     </div>
-                    <CheckOutConfirmPopup/>
-                 
+                    <CheckOutConfirmPopup />
                 </div>
             </main>
         </div>

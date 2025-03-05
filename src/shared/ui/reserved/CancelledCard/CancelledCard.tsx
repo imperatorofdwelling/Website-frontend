@@ -14,6 +14,7 @@ import InactiveTickIcon from '@/public/images/reserved/InactiveTickIcon.svg'
 import InactiveCalendar from '@/public/images/reserved/InactiveCalendar.svg'
 import CancelledRemovePopup from '../CancelledRemovePopup/CancelledRemovePopup'
 import CancelledAllRemovePopup from '../CancelledAllRemovePopup/CancelledAllRemovePopup'
+
 const reservations = [
     {
         id: 1,
@@ -151,9 +152,9 @@ export default function CancelledCard() {
                 ))
             ) : (
                 <div className='flex flex-col items-center justify-center h-[70vh]'>
-                    <h1 className='text-2xl'>All plans are going smoothly </h1>
+                    <h1 className='text-2xl'>All plans are going smoothly</h1>
                     <h3 className='text-sm'>
-                        You don't have any cancelled bookings yet
+                        You don&#39;t have any cancelled bookings yet
                     </h3>
                 </div>
             )}

@@ -19,17 +19,19 @@ const sortingOptions = [
     { label: 'Rating (0 to 5 stars)', value: 'low_grade' },
 ]
 
+interface SortingOptionProps {
+    label: string
+    value: string
+    checked?: boolean
+    onChange: () => void
+}
+
 function SortingOption({
     label,
     value,
     checked,
     onChange,
-}: {
-    label: string
-    value: string
-    checked?: boolean
-    onChange: () => void
-}) {
+}: SortingOptionProps) {
     return (
         <div className='flex justify-between border-t border-t-[#222225] p-4'>
             <div className='flex items-center gap-2.5'>
@@ -45,7 +47,7 @@ function SortingOption({
     )
 }
 
-export function FavoritesDwellingSortingModal({}: {}) {
+export function FavoritesDwellingSortingModal() {
     const [selectedOption, setSelectedOption] = useState<string>('default')
     const [isOpen, setIsOpen] = useState<boolean>(false)
 

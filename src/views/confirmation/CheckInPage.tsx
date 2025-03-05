@@ -9,6 +9,7 @@ import Image from 'next/image'
 import messageicon from '@/public/images/confirmation/messageicon.png'
 import RightArrowIcon from '@/public/images/SvgIcons/RightArrowIcon.svg'
 import CheckInConfirmPopup from '@/src/shared/ui/confirmation/CheckIn/CheckInConfirmPopup/CheckInConfirmPopup'
+
 export function CheckInPageUi() {
     return (
         <div className='text-white min-h-screen'>
@@ -43,7 +44,7 @@ export function CheckInPageUi() {
                         </h3>
                     </div>
 
-                    <div className='flex flex-col gap-1 py-2 border-b  border-[#1F1F1F]  w-full'></div>
+                    <div className='flex flex-col gap-1 py-2 border-b border-[#1F1F1F] w-full'></div>
 
                     <div className='flex justify-between items-start'>
                         <div className='flex flex-col gap-1 mt-3 py-2 '>
@@ -60,30 +61,26 @@ export function CheckInPageUi() {
                                 E-mail: privetmedved@gmail.com
                             </h3>
                         </div>
-                        <div className='flex flex-col items-center justify-center my-3  gap-[6px] bg-[#131313] w-[48px] h-[48px] mt-6 border border-[#1B1B1C] rounded-lg'>
+                        <div className='flex flex-col items-center justify-center my-3 gap-[6px] bg-[#131313] w-[48px] h-[48px] mt-6 border border-[#1B1B1C] rounded-lg'>
                             <Image src={messageicon} alt='messageicon' />
                         </div>
                     </div>
 
-
                     <div className='flex justify-between items-start'>
                         <div className='flex flex-col gap-1 mt-3 py-2 '>
-                            <h3 className='text-lg'>
-                            Owner's rules
+                            <h3 className='text-lg'>Owner&apos;s rules</h3>
+                            <h3 className='text-light_grey text-sm'>
+                                Check-in: 11:00-20:00
                             </h3>
                             <h3 className='text-light_grey text-sm'>
-                            Check-in: 11:00-20:00
-                            </h3>
-                            <h3 className='text-light_grey text-sm'>
-                            Check-out: 14:00-16:00
+                                Check-out: 14:00-16:00
                             </h3>
                         </div>
-                        <div className='flex flex-col items-center justify-center my-3  gap-[6px] bg-[#131313] w-[48px] h-[48px] mt-6 border border-[#1B1B1C] rounded-lg'>
-                           <RightArrowIcon/>
+                        <div className='flex flex-col items-center justify-center my-3 gap-[6px] bg-[#131313] w-[48px] h-[48px] mt-6 border border-[#1B1B1C] rounded-lg'>
+                            <RightArrowIcon />
                         </div>
                     </div>
-                    <CheckInConfirmPopup/>
-                 
+                    <CheckInConfirmPopup />
                 </div>
             </main>
         </div>
