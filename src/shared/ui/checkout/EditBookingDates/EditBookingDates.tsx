@@ -41,9 +41,10 @@ export default function EditBookingDates() {
                         />
                     </div>
                     <div className="px-2 flex items-center gap-2">
-                        <h4 className="text-base text-[#757575]">
-                            I'm flexible
-                        </h4>
+                    <h4 className="text-base text-[#757575]">
+    I&rsquo;m flexible
+</h4>
+
                         <DefaultCheckBox
                             name="flexible"
                             value="yes"

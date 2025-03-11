@@ -1,0 +1,1 @@
+export {CheckOutConfirmedPageUi as default} from '@/src/views/confirmation/CheckOutConfirmedPage'

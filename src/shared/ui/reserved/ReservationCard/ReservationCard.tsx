@@ -149,7 +149,9 @@ export default function ReservationCard() {
             ) : (
                 <div className='flex flex-col items-center justify-center h-[70vh]'>
                     <h1 className='text-2xl'>Where to?</h1>
-                    <h3 className='text-sm'>You haven't booked anything yet</h3>
+                    <h3 className='text-sm'>
+                        You haven&apos;t booked anything yet
+                    </h3>
                 </div>
             )}
         </>

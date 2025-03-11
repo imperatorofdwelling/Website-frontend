@@ -85,7 +85,6 @@ export const useFormHandler = ({
                     switch (status) {
                         case 400:
                             if (typeof responseBody.error === 'object') {
-                                // Handle nested validation errors
                                 apiErrors = { ...responseBody.error }
                             } else if (
                                 responseBody.error === 'user already exists'
@@ -107,7 +106,7 @@ export const useFormHandler = ({
                         default:
                             apiErrors.general = ERROR_MESSAGES.DEFAULT
                     }
-                } catch (parseError) {
+                } catch {
                     apiErrors.general = ERROR_MESSAGES.PARSE
                 }
             } else if (error instanceof Error) {

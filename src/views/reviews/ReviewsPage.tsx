@@ -7,10 +7,18 @@ import { ReviewCard } from '@/src/shared/ui/reviews/ReviewCard/ReviewCard'
 import { SelectSortingOptionsModal } from '@/src/shared/ui/reviews/SelectSortingOptionsModal/SelectSortingOptionsModal'
 import { BASE_URL } from '@/src/shared/utils/ky'
 
+interface Review {
+    id: string
+    title: string
+    description: string
+    created_at: string
+    rating: number
+}
+
 export function ReviewsPageUi() {
     const [searchQuery, setSearchQuery] = useState<string>('')
     const [sortOption, setSortOption] = useState<string>('default')
-    const [staysReviews, setStaysReviews] = useState<any[]>([])
+    const [staysReviews, setStaysReviews] = useState<Review[]>([])
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string | null>(null)
     const [visibleCount, setVisibleCount] = useState<number>(5)
@@ -25,24 +33,27 @@ export function ReviewsPageUi() {
 
     const getStaysReviews = async () => {
         try {
-            const response = await BASE_URL.get('staysreviews').json()
+            const response = await BASE_URL.get('staysreviews').json<{
+                data: Review[]
+            }>()
             if (response?.data) {
                 setStaysReviews(response.data)
             } else {
                 setError('No reviews found.')
             }
-        } catch (err) {
+        } catch {
             setError('Failed to load stays reviews.')
         } finally {
             setLoading(false)
         }
     }
+    
 
     useEffect(() => {
         getStaysReviews()
     }, [])
 
-    let filteredReviews = staysReviews.filter(
+    const filteredReviews = staysReviews.filter(
         (review) =>
             review.title.toLowerCase().includes(searchQuery) ||
             review.description.toLowerCase().includes(searchQuery)
@@ -100,7 +111,7 @@ export function ReviewsPageUi() {
                 {visibleReviews.length < filteredReviews.length && (
                     <button
                         className='gap-2.5 self-stretch px-4 py-4 w-full text-base font-semibold text-white bg-blue rounded-lg min-h-[56px] default-hover-active'
-                        onClick={() => setVisibleCount(visibleCount + 5)}
+                        onClick={() => setVisibleCount((prev) => prev + 5)}
                     >
                         More
                     </button>

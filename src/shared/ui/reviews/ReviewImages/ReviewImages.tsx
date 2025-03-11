@@ -68,11 +68,12 @@ export const ReviewImages = ({ images }: ReviewImagesProps) => {
                 >
                     {images.map((image, index) => (
                         <SwiperSlide key={index}>
-                            <img
+                           <Image
                                 src={image}
                                 alt={`Review image ${index + 1}`}
                                 className="h-[80vh] w-[100%] object-cover"
                             />
+
                         </SwiperSlide>
                     ))}
                 </Swiper>
