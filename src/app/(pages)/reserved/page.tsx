@@ -1,0 +1,1 @@
+export {ReservedPageUi as default} from '@/src/views/reserved/ReservedPage'

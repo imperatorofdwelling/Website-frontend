@@ -1,0 +1,1 @@
+export {ReviewsPageUi as default} from "@/src/views/reviews/ReviewsPage"

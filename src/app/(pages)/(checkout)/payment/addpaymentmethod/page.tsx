@@ -1,0 +1,1 @@
+export { AddPaymentMethodPageUi as default} from "@/src/views/checkout/payment/addpaymentmethodPage";
