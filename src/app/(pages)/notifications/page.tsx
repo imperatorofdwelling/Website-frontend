@@ -1,0 +1,1 @@
+export {NotificationsPageUi as default} from "@/src/views/notifications/NotificationsPage"
