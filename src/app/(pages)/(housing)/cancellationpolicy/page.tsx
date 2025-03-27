@@ -1,0 +1,1 @@
+export {CancellationPolicyPageUi as default} from '@/src/views/housing/CancellationPolicyPage'

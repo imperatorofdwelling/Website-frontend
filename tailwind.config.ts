@@ -100,4 +100,5 @@ const config: Config = {
         require('tailwindcss-animate'),
     ],
 }
+config.plugins?.push(require('tailwind-scrollbar-hide'))
 export default config

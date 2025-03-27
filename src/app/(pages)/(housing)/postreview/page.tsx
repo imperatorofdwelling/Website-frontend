@@ -1,0 +1,1 @@
+export {PostReviewPageUi as default} from '@/src/views/housing/PostReviewPage'

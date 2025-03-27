@@ -1,0 +1,1 @@
+export {EditBookingSuccessPageUi as default} from '@/src/views/housing/EditBookingSuccessPage'

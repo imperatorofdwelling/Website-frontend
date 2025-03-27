@@ -1,0 +1,1 @@
+export {ApartsDetailReservedPageUi as default} from '@/src/views/housing/ApartsDetailReservedPage'
