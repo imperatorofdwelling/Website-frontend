@@ -1,0 +1,1 @@
+export {ProfilePageUi as default} from '@/src/views/user/Profile'

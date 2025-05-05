@@ -1,0 +1,1 @@
+export {CityPageUi as default} from '@/src/views/user/City'

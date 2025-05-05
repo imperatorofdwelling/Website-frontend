@@ -1,0 +1,1 @@
+export {LanguagePageUi as default} from '@/src/views/user/LanguagePage'

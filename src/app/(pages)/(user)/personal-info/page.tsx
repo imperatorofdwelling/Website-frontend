@@ -1,0 +1,1 @@
+export {PersonalInfoPageUi as default} from '@/src/views/user/PersonalInfo'
