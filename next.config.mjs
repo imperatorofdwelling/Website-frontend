@@ -30,6 +30,21 @@ const nextConfig = {
 
     return config
 },
+images: {
+    remotePatterns: [
+        {
+          protocol: 'http',
+          hostname: '81.200.153.83',
+          pathname: '/images_mock/**', // Add the path if needed
+        },
+        {
+          protocol: 'https',
+          hostname: 'images.unsplash.com', // Ensure you allow this domain if you're using Unsplash
+          pathname: '/**',
+        },
+    ],
+  }
+
 }
 
 export default nextConfig
