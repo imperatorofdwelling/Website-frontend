@@ -25,6 +25,8 @@ export default function ImageUploadPopUp() {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const cameraInputRef = useRef<HTMLInputElement>(null)
 
+    console.log(error, loading)
+
     const getTokenFromCookie = (): string | null => {
         const match = document.cookie
             .split('; ')
@@ -58,7 +60,7 @@ export default function ImageUploadPopUp() {
 
         try {
             const response = await BASE_URL.get(
-                `user/profile/picture/${userId}`
+                `/user/profile/picture/${userId}`
             ).json<{ data: string }>()
 
             if (response?.data) {
@@ -165,8 +167,8 @@ export default function ImageUploadPopUp() {
                     </label>
                 </div>
             </DrawerTrigger>
-            {loading && <p className='text-gray-400'>Loading...</p>}
-            {error && <p className='text-red-500'>{error}</p>}
+            {/* {loading && <p className='text-gray-400'>Loading...</p>} */}
+            {/* {error && <p className='text-red-500'>{error}</p>} */}
 
             <DrawerContent>
                 <DrawerTitle className='sr-only'>
