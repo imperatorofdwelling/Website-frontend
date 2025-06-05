@@ -1,10 +1,41 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import RatingIcon from '@/public/images/housing/RatingIcon.svg'
+import { BASE_URL } from '@/src/shared/utils/ky'
+import { Loader } from '@/src/shared/ui/Loader/Loader'
+import { useRouter } from 'next/navigation'
 
-export function HousingRatingCard({ reviews }: { reviews: { image: string; name: string; rating: number; text: string }[] }) {
+type Review = {
+    image: string
+    name: string
+    rating: number
+    text: string
+}
+
+export function HousingRatingCard({ stayId }: { stayId: string }) {
+    const router = useRouter()
+    const [reviews, setReviews] = useState<Review[]>([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const res = await BASE_URL.get(`staysreviews/${stayId}`).json<{
+                    data: Review[]
+                }>()
+                setReviews(res.data)
+            } catch (err) {
+                console.error('Failed to load reviews:', err)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        if (stayId) fetchReviews()
+    }, [stayId]) 
+
     const [expandedIndexes, setExpandedIndexes] = useState<number[]>([])
 
     const toggleExpand = (index: number) => {
@@ -14,6 +45,10 @@ export function HousingRatingCard({ reviews }: { reviews: { image: string; name:
                 : [...prev, index]
         )
     }
+
+    if (loading) return <Loader loading={true} />
+    if (!reviews.length)
+        return <p className='text-sm text-light_grey'>No reviews found</p>
 
     return (
         <div className='flex gap-2 items-start my-4 overflow-x-auto whitespace-nowrap scrollbar-hide'>
@@ -30,7 +65,7 @@ export function HousingRatingCard({ reviews }: { reviews: { image: string; name:
                         <div className='flex items-center gap-2 mt-2'>
                             <Image
                                 src={review.image}
-                                alt='housingImg'
+                                alt='Reviewer image'
                                 width={48}
                                 height={48}
                                 className='w-[48px] h-[48px] rounded-lg'
@@ -52,7 +87,8 @@ export function HousingRatingCard({ reviews }: { reviews: { image: string; name:
                                         className='text-[#006BE6] cursor-pointer'
                                         onClick={() => toggleExpand(index)}
                                     >
-                                        <span className='text-white'>...</span>{' '}See more
+                                        <span className='text-white'>...</span>{' '}
+                                        See more
                                     </span>
                                 )}
                             </h4>
@@ -60,6 +96,12 @@ export function HousingRatingCard({ reviews }: { reviews: { image: string; name:
                     </div>
                 )
             })}
+            <button
+                onClick={() => router.push(`/reviews/${stayId}`)}
+                className='w-full px-4 py-4 text-base font-semibold border border-[#1B1B1C] text-white bg-[#131313] rounded-lg min-h-[56px] default-hover-active'
+            >
+                View all reviews ({reviews.length})
+            </button>
         </div>
     )
 }

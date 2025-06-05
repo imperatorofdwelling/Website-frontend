@@ -31,6 +31,7 @@ const nextConfig = {
     return config
 },
 images: {
+  domains: ['81.200.153.83'],
     remotePatterns: [
         {
           protocol: 'http',

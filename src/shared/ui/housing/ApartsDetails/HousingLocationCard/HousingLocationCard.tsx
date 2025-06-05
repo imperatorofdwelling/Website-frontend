@@ -4,8 +4,11 @@ import Image from 'next/image'
 import messageicon from '@/public/images/confirmation/messageicon.png'
 import housingImg from '@/public/images/housing/housing1.png'
 import HotelIcon from '@/public/images/housing/HotelIcon.svg'
-
-export function HousingLocationCard() {
+import { Stay } from '@/src/shared/types/stayType'
+type Props = {
+    stay: Stay
+}
+export function HousingLocationCard({stay}: Props) {
     return (
         <div>
             <div className='flex justify-between items-start my-4'>
@@ -17,8 +20,8 @@ export function HousingLocationCard() {
                     />
 
                     <div className='flex flex-col'>
-                        <h3 className='text-lg'>Hotel Moonlight</h3>
-                        <h3 className='text-light_grey text-sm'>Hotel chain</h3>
+                        <h3 className='text-lg'>{stay.name}</h3>
+                        <h3 className='text-light_grey text-sm'>{stay.type}</h3>
                     </div>
                 </div>
                 <div className='flex flex-col items-center justify-center w-[48px] h-[48px] bg-[#131313] border border-[#3B3B3C] rounded-lg'>

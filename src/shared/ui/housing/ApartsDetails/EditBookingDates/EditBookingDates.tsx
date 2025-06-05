@@ -13,22 +13,32 @@ import { Calendar } from '@/src/shared/ui/ShadCn/calendar'
 import { DateRange } from 'react-day-picker'
 import DefaultCheckBox from '@/src/shared/ui/authentication/CheckBox/DefaultCheckBox'
 
-export default function EditBookingDates() {
-    const [selectedRange, setSelectedRange] = React.useState<DateRange | undefined>(undefined)
+interface EditBookingDatesProps {
+    selectedRange: DateRange | undefined
+    setSelectedRange: (range: DateRange | undefined) => void
+  }
+  
+  export default function EditBookingDates({
+    selectedRange,
+    setSelectedRange,
+  }: EditBookingDatesProps) {
+  
     const [buttonText, setButtonText] = React.useState('Select dates')
     const [isOpen, setIsOpen] = React.useState(false)
 
     const handleDateSelect = (range: DateRange | undefined) => {
         setSelectedRange(range)
         if (range?.from && range?.to) {
-            setButtonText('Book Now') // Change button text
+            setButtonText('Book Now')
         }
     }
+    
+      
 
     const handleApply = () => {
         if (selectedRange?.from && selectedRange?.to) {
             console.log('Selected Range:', selectedRange)
-            setIsOpen(false) // Close modal
+            setIsOpen(false) 
         }
     }
 

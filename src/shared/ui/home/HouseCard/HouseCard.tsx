@@ -14,6 +14,7 @@ import RoomIcon from '@/public/images/home/house/Room.svg'
 import HouseIcon from '@/public/images/home/house/House.svg'
 
 interface Stay {
+    id: string | number
     name: string
     street: string
     house: string | number
@@ -67,7 +68,7 @@ export default function HouseCard({ stay }: HouseCardProps) {
     }
 
     return (
-        <Link href={`/house/${1}`}>
+        <Link href={`/apartsdetail/${stay.id}`}>
             <div className='relative mb-2 rounded-2xl z-10'>
                 <Swiper
                     spaceBetween={10}
