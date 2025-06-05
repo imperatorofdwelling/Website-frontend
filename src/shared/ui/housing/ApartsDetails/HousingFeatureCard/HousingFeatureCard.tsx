@@ -30,6 +30,19 @@ type StayImage = {
     image_name: string
 }
 
+function isResponseError(
+    error: unknown
+): error is { response: { status: number } } {
+    return (
+        typeof error === 'object' &&
+        error !== null &&
+        'response' in error &&
+        typeof (error as { response?: unknown }).response === 'object' &&
+        error.response !== null &&
+        'status' in error.response
+    )
+}
+
 export default function HousingFeatureCard({ stay }: Props) {
     const router = useRouter()
     const [images, setImages] = useState<string[]>([])
@@ -106,14 +119,14 @@ export default function HousingFeatureCard({ stay }: Props) {
                 toast.success(response.data.message)
                 setIsLiked(true)
             }
-        } catch (error: any) {
-            if (error.response?.status === 401) {
+        } catch (error: unknown) {
+            if (isResponseError(error) && error.response.status === 401) {
                 toast.error('You need to log in first')
             } else {
                 toast.error('Failed to update favourite')
             }
             console.error('Error updating favourite:', error)
-        } finally {
+        }  finally {
             setLoading(false)
         }
     }

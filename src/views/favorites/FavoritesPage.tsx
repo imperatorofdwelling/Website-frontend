@@ -5,8 +5,12 @@ import { useEffect, useState } from 'react'
 import { SavedCards } from '@/src/shared/ui/favorites/SavedCards/SavedCards'
 import EmptyFavoritesList from '@/src/shared/ui/favorites/EmptyFavoritesList/EmptyFavoritesList'
 import { BASE_URL } from '@/src/shared/utils/ky'
-import Cookies from 'js-cookie'
 import { Loader } from '@/src/shared/ui/Loader/Loader'
+
+interface FavoriteItem {
+    id: string
+    name: string
+}
 
 interface FavoritePlace {
     id: string
@@ -25,17 +29,17 @@ export function FavoritesPageUi() {
                 const response = await BASE_URL.get('favourites', {
                     credentials: 'include',
                 }).json<{
-                    data: Record<string, any[]>
+                    data: Record<string, FavoriteItem[]>
                 }>()
 
-                const mapped: FavoritePlace[] = Object.entries(
-                    response.data
-                ).map(([city, places]) => ({
-                    id: city,
-                    name: city,
-                    options: places.length,
-                    isDeleted: places.length === 0,
-                }))
+                const mapped: FavoritePlace[] = Object.entries(response.data).map(
+                    ([city, places]) => ({
+                        id: city,
+                        name: city,
+                        options: places.length,
+                        isDeleted: places.length === 0,
+                    })
+                )
 
                 setFavoritePlaces(mapped)
             } catch (error) {

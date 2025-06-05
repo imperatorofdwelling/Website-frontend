@@ -36,9 +36,20 @@ interface Stay {
 type HouseCardProps = {
     stay: Stay
 }
+function isResponseError(
+    error: unknown
+): error is { response: { status: number } } {
+    return (
+        typeof error === 'object' &&
+        error !== null &&
+        'response' in error &&
+        typeof (error as { response?: unknown }).response === 'object' &&
+        error.response !== null &&
+        'status' in error.response
+    )
+}
 
 export default function HouseCard({ stay }: HouseCardProps) {
-
     const {
         id,
         name,
@@ -56,7 +67,6 @@ export default function HouseCard({ stay }: HouseCardProps) {
     const [loading, setLoading] = useState(false)
 
     if (!stay) return null
-
 
     const fullAddress = `${street}, House ${house}`
     const imagePath = images?.[0]?.image_name
@@ -80,18 +90,21 @@ export default function HouseCard({ stay }: HouseCardProps) {
     const handleLikeClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         e.preventDefault()
-    
+
         setLoading(true)
-    
+
         try {
             if (isLiked) {
-                const response = await BASE_URL.delete(`favourites/${stay.id}`, {
-                    credentials: 'include',
-                    headers: {
-                        accept: 'application/json',
-                    },
-                }).json<{ data: { message: string } }>()
-    
+                const response = await BASE_URL.delete(
+                    `favourites/${stay.id}`,
+                    {
+                        credentials: 'include',
+                        headers: {
+                            accept: 'application/json',
+                        },
+                    }
+                ).json<{ data: { message: string } }>()
+
                 toast.success(response.data.message)
                 setIsLiked(false)
             } else {
@@ -101,12 +114,12 @@ export default function HouseCard({ stay }: HouseCardProps) {
                         accept: 'application/json',
                     },
                 }).json<{ data: { message: string } }>()
-    
+
                 toast.success(response.data.message)
                 setIsLiked(true)
             }
-        } catch (error: any) {
-            if (error.response?.status === 401) {
+        } catch (error: unknown) {
+            if (isResponseError(error) && error.response.status === 401) {
                 toast.error('You need to log in first')
             } else {
                 toast.error('Failed to update favourite')
@@ -116,7 +129,6 @@ export default function HouseCard({ stay }: HouseCardProps) {
             setLoading(false)
         }
     }
-    
 
     return (
         <Link href={`/apartsdetail/${id}`}>
