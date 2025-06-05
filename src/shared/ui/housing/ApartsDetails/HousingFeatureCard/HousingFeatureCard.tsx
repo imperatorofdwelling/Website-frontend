@@ -19,6 +19,7 @@ import StarIcon from '@/public/images/SvgIcons/StarIcon.svg'
 import { useRouter } from 'next/navigation'
 import ApartmentIcon from '@/public/images/SvgIcons/Apartment.svg'
 import HouseIcon from '@/public/images/home/house/House.svg'
+import toast from 'react-hot-toast'
 
 type Props = {
     stayId: string
@@ -34,7 +35,8 @@ export default function HousingFeatureCard({ stay }: Props) {
     const [images, setImages] = useState<string[]>([])
     const [locationAddress, setLocationAddress] = useState<string | null>(null)
     const defaultImages = [Hotel1, Hotel1, Hotel1, Hotel1]
-
+    const [isLiked, setIsLiked] = useState(false)
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         const fetchImages = async () => {
             try {
@@ -73,6 +75,49 @@ export default function HousingFeatureCard({ stay }: Props) {
         fetchLocation()
     }, [stay?.id, stay.location_id])
 
+    const handleLikeClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation()
+        e.preventDefault()
+
+        setLoading(true)
+
+        try {
+            if (isLiked) {
+                const response = await BASE_URL.delete(
+                    `favourites/${stay.id}`,
+                    {
+                        credentials: 'include',
+                        headers: {
+                            accept: 'application/json',
+                        },
+                    }
+                ).json<{ data: { message: string } }>()
+
+                toast.success(response.data.message)
+                setIsLiked(false)
+            } else {
+                const response = await BASE_URL.post(`favourites/${stay.id}`, {
+                    credentials: 'include',
+                    headers: {
+                        accept: 'application/json',
+                    },
+                }).json<{ data: { message: string } }>()
+
+                toast.success(response.data.message)
+                setIsLiked(true)
+            }
+        } catch (error: any) {
+            if (error.response?.status === 401) {
+                toast.error('You need to log in first')
+            } else {
+                toast.error('Failed to update favourite')
+            }
+            console.error('Error updating favourite:', error)
+        } finally {
+            setLoading(false)
+        }
+    }
+
     const safeImages = images.length > 0 ? images : defaultImages
 
     const getTypeIcon = (type: string): JSX.Element => {
@@ -103,7 +148,13 @@ export default function HousingFeatureCard({ stay }: Props) {
                     <button className='bg-[#131313] border border-[#1B1B1C] p-4 rounded-lg default-hover-active'>
                         <ShareIcon />
                     </button>
-                    <button className='bg-[#131313] border border-[#1B1B1C] p-4 rounded-lg default-hover-active'>
+                    <button
+                        onClick={handleLikeClick}
+                        disabled={loading}
+                        className={`bg-[#131313] border border-[#1B1B1C] p-4 rounded-lg default-hover-active   ${
+                            isLiked ? 'text-red-500' : ''
+                        }`}
+                    >
                         <HeartIcon />
                     </button>
                 </div>

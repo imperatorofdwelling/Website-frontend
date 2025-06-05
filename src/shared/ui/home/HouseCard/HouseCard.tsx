@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import LocationIcon from '@/public/images/home/AboutLocation/location.svg'
 import StarIcon from '@/public/images/StarIcon.svg'
@@ -12,6 +14,9 @@ import ApartmentIcon from '@/public/images/SvgIcons/Apartment.svg'
 import BedIcon from '@/public/images/home/house/Bed.svg'
 import RoomIcon from '@/public/images/home/house/Room.svg'
 import HouseIcon from '@/public/images/home/house/House.svg'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { BASE_URL } from '@/src/shared/utils/ky'
 
 interface Stay {
     id: string | number
@@ -33,9 +38,9 @@ type HouseCardProps = {
 }
 
 export default function HouseCard({ stay }: HouseCardProps) {
-    if (!stay) return null
 
     const {
+        id,
         name,
         street,
         house,
@@ -46,6 +51,12 @@ export default function HouseCard({ stay }: HouseCardProps) {
         number_of_beds,
         number_of_bedrooms,
     } = stay
+
+    const [isLiked, setIsLiked] = useState(false)
+    const [loading, setLoading] = useState(false)
+
+    if (!stay) return null
+
 
     const fullAddress = `${street}, House ${house}`
     const imagePath = images?.[0]?.image_name
@@ -66,9 +77,49 @@ export default function HouseCard({ stay }: HouseCardProps) {
                 return <HotelIcon />
         }
     }
+    const handleLikeClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation()
+        e.preventDefault()
+    
+        setLoading(true)
+    
+        try {
+            if (isLiked) {
+                const response = await BASE_URL.delete(`favourites/${stay.id}`, {
+                    credentials: 'include',
+                    headers: {
+                        accept: 'application/json',
+                    },
+                }).json<{ data: { message: string } }>()
+    
+                toast.success(response.data.message)
+                setIsLiked(false)
+            } else {
+                const response = await BASE_URL.post(`favourites/${stay.id}`, {
+                    credentials: 'include',
+                    headers: {
+                        accept: 'application/json',
+                    },
+                }).json<{ data: { message: string } }>()
+    
+                toast.success(response.data.message)
+                setIsLiked(true)
+            }
+        } catch (error: any) {
+            if (error.response?.status === 401) {
+                toast.error('You need to log in first')
+            } else {
+                toast.error('Failed to update favourite')
+            }
+            console.error('Error updating favourite:', error)
+        } finally {
+            setLoading(false)
+        }
+    }
+    
 
     return (
-        <Link href={`/apartsdetail/${stay.id}`}>
+        <Link href={`/apartsdetail/${id}`}>
             <div className='relative mb-2 rounded-2xl z-10'>
                 <Swiper
                     spaceBetween={10}
@@ -94,9 +145,12 @@ export default function HouseCard({ stay }: HouseCardProps) {
                 <Button
                     variant={'none'}
                     size={'icon'}
-                    onClick={(e) => e.stopPropagation()}
-                    className='absolute top-4 w-7 h-7 right-4 z-50 cursor-pointer default-hover-active'
+                    onClick={handleLikeClick}
+                    className={`absolute top-4 w-7 h-7 right-4 z-50 cursor-pointer default-hover-active ${
+                        isLiked ? 'text-red-500' : ''
+                    }`}
                     aria-label='Like this house'
+                    disabled={loading}
                 >
                     <LikeIcon />
                 </Button>
