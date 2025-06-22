@@ -6,6 +6,7 @@ import { SavedCards } from '@/src/shared/ui/favorites/SavedCards/SavedCards'
 import EmptyFavoritesList from '@/src/shared/ui/favorites/EmptyFavoritesList/EmptyFavoritesList'
 import { BASE_URL } from '@/src/shared/utils/ky'
 import { Loader } from '@/src/shared/ui/Loader/Loader'
+import { CookieManager } from '@/src/shared/utils/CookieManager'
 
 interface FavoriteItem {
     id: string
@@ -22,36 +23,41 @@ interface FavoritePlace {
 export function FavoritesPageUi() {
     const [favoritePlaces, setFavoritePlaces] = useState<FavoritePlace[]>([])
     const [loading, setLoading] = useState(true)
+      const token = CookieManager.getTokenOnly()
 
-    useEffect(() => {
+      console.log(token, "tokennnnnn")
+      console.log('All cookies:', document.cookie)
+
+      
+
+      useEffect(() => {
         const fetchFavorites = async () => {
-            try {
-                const response = await BASE_URL.get('favourites', {
-                    credentials: 'include',
-                }).json<{
-                    data: Record<string, FavoriteItem[]>
-                }>()
-
-                const mapped: FavoritePlace[] = Object.entries(response.data).map(
-                    ([city, places]) => ({
-                        id: city,
-                        name: city,
-                        options: places.length,
-                        isDeleted: places.length === 0,
-                    })
-                )
-
-                setFavoritePlaces(mapped)
-            } catch (error) {
-                console.error('Failed to fetch favorites:', error)
-                setFavoritePlaces([])
-            } finally {
-                setLoading(false)
-            }
+          try {
+            const response = await BASE_URL.get('favourites').json<{
+              data: Record<string, FavoriteItem[]>
+            }>()
+      
+            const mapped: FavoritePlace[] = Object.entries(response.data).map(
+              ([city, places]) => ({
+                id: city,
+                name: city,
+                options: places.length,
+                isDeleted: places.length === 0,
+              })
+            )
+      
+            setFavoritePlaces(mapped)
+          } catch (error) {
+            console.error('Failed to fetch favorites:', error)
+            setFavoritePlaces([])
+          } finally {
+            setLoading(false)
+          }
         }
-
+      
         fetchFavorites()
-    }, [])
+      }, [])
+      
 
     if (loading)
         return (
