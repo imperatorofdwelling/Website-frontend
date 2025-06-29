@@ -1,0 +1,1 @@
+export {VerifyingPageUi as default} from '@/src/views/landlord/verification/VerifyingPage'

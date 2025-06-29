@@ -1,0 +1,1 @@
+export {PhotoIdPageUi as default} from '@/src/views/landlord/verification/PhotoIdPage'

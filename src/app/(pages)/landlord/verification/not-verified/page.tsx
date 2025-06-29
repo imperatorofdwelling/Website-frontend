@@ -1,0 +1,1 @@
+export {NotVerifiedPageUi as default} from '@/src/views/landlord/verification/NotVerified'

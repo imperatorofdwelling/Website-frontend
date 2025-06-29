@@ -77,9 +77,10 @@ export default function BottomMenuBar() {
                 {menuItems.map((item) => {
                     // Determine if the current tab is active based on the pathname
                     const isActive =
-                        pathname === `/${item.label.toLowerCase()}` ||
-                        (pathname === '/' && item.label === 'Home')
-
+                    (item.label === 'Home' &&
+                      (pathname === '/' || pathname === '/landlord/dashboard')) ||
+                    pathname === `/${item.label.toLowerCase()}`
+                  
                     return (
                         <MenuItem
                             key={item.id}

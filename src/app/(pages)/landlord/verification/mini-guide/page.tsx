@@ -1,0 +1,1 @@
+export {MiniGuidePageUi as default} from '@/src/views/landlord/verification/MiniGuidePage'

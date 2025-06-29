@@ -1,0 +1,1 @@
+export {DetailsPage as default} from '@/src/views/landlord/verification/DetailsPage'

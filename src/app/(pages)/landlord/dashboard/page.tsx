@@ -1,0 +1,1 @@
+export {DashboardPageUi as default} from '@/src/views/landlord/dashboard/DashboardPage'

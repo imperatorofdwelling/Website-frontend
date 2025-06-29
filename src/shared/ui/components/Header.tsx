@@ -28,7 +28,7 @@ export const Header = ({ title, back, rightContent, onClick }: HeaderProps) => {
     }
 
     return (
-        <header className='flex items-center justify-between mb-4'>
+        <header className='flex items-center justify-between mb-4 z-50'>
             <div
                 onClick={handleBack}
                 className='flex items-center cursor-pointer'
