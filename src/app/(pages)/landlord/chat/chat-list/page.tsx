@@ -1,0 +1,1 @@
+export {ChatListPageUi as default} from "@/src/views/landlord/chat/ChatListPage"

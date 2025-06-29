@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Header } from '@/src/shared/ui/components/Header'
 import frameImg from '@/public/images/landlord/passport.png'
-import Faq from '@/public/images/landlord/Faq.svg'
 
 export function PhotoTakenPageUi() {
     const router = useRouter()

@@ -1,6 +1,9 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+
 import HomeDefaultIcon from '@/public/images/SvgIcons/HomeDefault.svg'
 import HomeActiveIcon from '@/public/images/SvgIcons/HomeClicked.svg'
 import FavoritesDefaultIcon from '@/public/images/SvgIcons/FavoritesDefault.svg'
@@ -9,7 +12,8 @@ import MessageDefaultIcon from '@/public/images/SvgIcons/MessagesDefault.svg'
 import MessageActiveIcon from '@/public/images/SvgIcons/MessagesClicked.svg'
 import ProfileDefaultIcon from '@/public/images/SvgIcons/ProfileDefault.svg'
 import ProfileActiveIcon from '@/public/images/SvgIcons/ProfileClicked.svg'
-import Link from 'next/link'
+import ObjectDefaultIcon from '@/public/images/SvgIcons/ObjectDefault.svg'
+import ObjectActiveIcon from '@/public/images/SvgIcons/ObjectClicked.svg'
 
 interface MenuItemProps {
     isActive: boolean
@@ -21,14 +25,18 @@ interface MenuItemProps {
 function MenuItem({ isActive, defaultIcon, activeIcon, label }: MenuItemProps) {
     return (
         <Link
-            href={`/${label === 'Home' ? '' : label.toLowerCase()}`}
-            className="flex flex-col items-center default-hover-active"
-            role="button"
+            href={`/${
+                label === 'Home' ? '' : label.toLowerCase().replace(/\s+/g, '-')
+            }`}
+            className='flex flex-col items-center default-hover-active'
+            role='button'
             aria-label={label}
         >
             {isActive ? activeIcon : defaultIcon}
             <span
-                className={`text-xs mt-1 ${isActive ? 'text-blue-500' : 'text-white'}`}
+                className={`text-xs mt-1 ${
+                    isActive ? 'text-blue-500' : 'text-white'
+                }`}
             >
                 {label}
             </span>
@@ -36,51 +44,95 @@ function MenuItem({ isActive, defaultIcon, activeIcon, label }: MenuItemProps) {
     )
 }
 
+function isMenuItemActive(label: string, pathname: string): boolean {
+    switch (label) {
+        case 'Home':
+            return pathname === '/' || pathname === '/landlord/dashboard'
+        case 'Messages':
+            return (
+                pathname === '/messages' ||
+                pathname === '/landlord/chat/chat-list'
+            )
+        case 'Favorites':
+            return pathname === '/favorites'
+        case 'My objects':
+            return pathname === '/my-objects'
+        case 'Profile':
+            return pathname === '/profile'
+        default:
+            return false
+    }
+}
+
 export default function BottomMenuBar() {
     const pathname = usePathname()
+    const [userRole, setUserRole] = useState<string | null>(null)
+    const [loading, setLoading] = useState(true)
 
-    // Hide the bottom menu bar on the login and register pages
+    useEffect(() => {
+        const role = localStorage.getItem('userRole')
+        setUserRole(role)
+        setLoading(false)
+    }, [])
+
     if (pathname === '/login' || pathname === '/registration') {
-        return
+        return null
+    }
+
+    if (loading) {
+        return (
+            <div className='fixed inset-0 z-50 bg-black flex items-center justify-center'>
+                <span className='text-white text-sm animate-pulse'>
+                    Loading...
+                </span>
+            </div>
+        )
     }
 
     const menuItems = [
         {
             id: 1,
-            defaultIcon: <HomeDefaultIcon className="w-6 h-6" />,
-            activeIcon: <HomeActiveIcon className="w-6 h-6" />,
+            defaultIcon: <HomeDefaultIcon className='w-6 h-6' />,
+            activeIcon: <HomeActiveIcon className='w-6 h-6' />,
             label: 'Home',
         },
+        ...(userRole === 'landlord'
+            ? [
+                  {
+                      id: 3,
+                      defaultIcon: <ObjectDefaultIcon className='w-6 h-6' />,
+                      activeIcon: <ObjectActiveIcon className='w-6 h-6' />,
+                      label: 'My objects',
+                  },
+              ]
+            : [
+                  {
+                      id: 2,
+                      defaultIcon: <FavoritesDefaultIcon className='w-6 h-6' />,
+                      activeIcon: <FavoritesActiveIcon className='w-6 h-6' />,
+                      label: 'Favorites',
+                  },
+              ]),
         {
-            id: 2,
-            defaultIcon: <FavoritesDefaultIcon className="w-6 h-6" />,
-            activeIcon: <FavoritesActiveIcon className="w-6 h-6" />,
-            label: 'Favorites',
-        },
-        {
-            id: 3,
-            defaultIcon: <MessageDefaultIcon className="w-6 h-6" />,
-            activeIcon: <MessageActiveIcon className="w-6 h-6" />,
+            id: 4,
+            defaultIcon: <MessageDefaultIcon className='w-6 h-6' />,
+            activeIcon: <MessageActiveIcon className='w-6 h-6' />,
             label: 'Messages',
         },
         {
-            id: 4,
-            defaultIcon: <ProfileDefaultIcon className="w-6 h-6" />,
-            activeIcon: <ProfileActiveIcon className="w-6 h-6" />,
+            id: 5,
+            defaultIcon: <ProfileDefaultIcon className='w-6 h-6' />,
+            activeIcon: <ProfileActiveIcon className='w-6 h-6' />,
             label: 'Profile',
         },
     ]
 
     return (
-        <div className='fixed z-50 bottom-0 left-0 right-0 bg-black '>
-            <div className="mx-auto w-full max-w-[480px] text-white shadow-lg flex justify-around py-3">
+        <div className='fixed z-50 bottom-0 left-0 right-0 bg-black'>
+            <div className='mx-auto w-full max-w-[480px] text-white shadow-lg flex justify-around py-3'>
                 {menuItems.map((item) => {
-                    // Determine if the current tab is active based on the pathname
-                    const isActive =
-                    (item.label === 'Home' &&
-                      (pathname === '/' || pathname === '/landlord/dashboard')) ||
-                    pathname === `/${item.label.toLowerCase()}`
-                  
+                    const isActive = isMenuItemActive(item.label, pathname)
+
                     return (
                         <MenuItem
                             key={item.id}

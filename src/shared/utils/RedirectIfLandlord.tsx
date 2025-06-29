@@ -9,8 +9,13 @@ export default function RedirectIfLandlord() {
 
     useEffect(() => {
         const userRole = localStorage.getItem('userRole')
+
         if (userRole === 'landlord' && pathname === '/') {
             router.replace('/landlord/dashboard')
+        }
+
+        if (userRole === 'landlord' && pathname === '/messages') {
+            router.replace('/landlord/chat/chat-list')
         }
     }, [pathname, router])
 

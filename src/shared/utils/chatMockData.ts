@@ -1,0 +1,67 @@
+import chat1 from '@/public/images/landlord/chat/chat1.png'
+import chat2 from '@/public/images/landlord/chat/chat2.png'
+import chat3 from '@/public/images/landlord/chat/chat3.png'
+import chat4 from '@/public/images/landlord/chat/chat4.png'
+
+export const chatData = [
+    {
+        id: 1,
+        name: 'Name Surname',
+        date: '2025-08-14',
+        description: 'Decinyrar. Jasminrevolution. Hybelt.',
+        image: chat1,
+        isPinned: true,
+        isUnread: true,
+        unreadCount: 3,
+        isLiveChat: false,
+        isArchived: false,
+    },
+    {
+        id: 2,
+        name: 'Name Surname',
+        date: '2025-08-14',
+        description: 'Decinyrar. Jasminrevolution. Hybelt.',
+        image: chat2,
+        isPinned: false,
+        isUnread: true,
+        unreadCount: 1,
+        isLiveChat: false,
+        isArchived: false,
+    },
+    {
+        id: 3,
+        name: 'Name Surname',
+        date: '2025-08-12',
+        description: 'Decinyrar. Jasminrevolution. Hybelt.',
+        image: chat3,
+        isPinned: false,
+        isUnread: false,
+        unreadCount: 0,
+        isLiveChat: false,
+        isArchived: true,
+    },
+    {
+        id: 4,
+        name: 'Name Surname',
+        date: '2025-08-13',
+        description: 'Decinyrar. Jasminrevolution. Hybelt.',
+        image: chat4,
+        isPinned: true,
+        isUnread: false,
+        unreadCount: 0,
+        isLiveChat: false,
+        isArchived: true,
+    },
+    {
+        id: 5,
+        name: 'Live chat',
+        date: '2025-08-14',
+        description: 'Decinyrar. Jasminrevolution. Hybelt.',
+        image: '',
+        isPinned: false,
+        isUnread: false,
+        unreadCount: 0,
+        isLiveChat: true,
+        isArchived: false,
+    },
+]
