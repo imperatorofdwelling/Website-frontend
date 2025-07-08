@@ -20,14 +20,22 @@ interface MenuItemProps {
     defaultIcon: JSX.Element
     activeIcon: JSX.Element
     label: string
+    href: string
 }
 
-function MenuItem({ isActive, defaultIcon, activeIcon, label }: MenuItemProps) {
+function MenuItem({
+    isActive,
+    defaultIcon,
+    activeIcon,
+    label,
+    href,
+}: MenuItemProps) {
     return (
         <Link
-            href={`/${
-                label === 'Home' ? '' : label.toLowerCase().replace(/\s+/g, '-')
-            }`}
+            // href={`/${
+            //     label === 'Home' ? '' : label.toLowerCase().replace(/\s+/g, '-')
+            // }`}
+            href={href}
             className='flex flex-col items-center default-hover-active'
             role='button'
             aria-label={label}
@@ -95,35 +103,40 @@ export default function BottomMenuBar() {
             defaultIcon: <HomeDefaultIcon className='w-6 h-6' />,
             activeIcon: <HomeActiveIcon className='w-6 h-6' />,
             label: 'Home',
+            href: '/',
         },
-        ...(userRole === 'landlord'
-            ? [
-                  {
-                      id: 3,
-                      defaultIcon: <ObjectDefaultIcon className='w-6 h-6' />,
-                      activeIcon: <ObjectActiveIcon className='w-6 h-6' />,
-                      label: 'My objects',
-                  },
-              ]
-            : [
-                  {
-                      id: 2,
-                      defaultIcon: <FavoritesDefaultIcon className='w-6 h-6' />,
-                      activeIcon: <FavoritesActiveIcon className='w-6 h-6' />,
-                      label: 'Favorites',
-                  },
-              ]),
+        // ...(userRole === 'landlord'
+        //     ? [
+        {
+            id: 3,
+            defaultIcon: <ObjectDefaultIcon className='w-6 h-6' />,
+            activeIcon: <ObjectActiveIcon className='w-6 h-6' />,
+            label: 'My objects',
+            href: '/landlord/my-objects',
+        },
+        //   ]
+        // : [
+        //       {
+        //           id: 2,
+        //           defaultIcon: <FavoritesDefaultIcon className='w-6 h-6' />,
+        //           activeIcon: <FavoritesActiveIcon className='w-6 h-6' />,
+        //           label: 'Favorites',
+        //           href: '/favorites',
+        //       },
+        //   ]),
         {
             id: 4,
             defaultIcon: <MessageDefaultIcon className='w-6 h-6' />,
             activeIcon: <MessageActiveIcon className='w-6 h-6' />,
             label: 'Messages',
+            href: '/messages',
         },
         {
             id: 5,
             defaultIcon: <ProfileDefaultIcon className='w-6 h-6' />,
             activeIcon: <ProfileActiveIcon className='w-6 h-6' />,
             label: 'Profile',
+            href: '/profile',
         },
     ]
 
@@ -140,6 +153,7 @@ export default function BottomMenuBar() {
                             defaultIcon={item.defaultIcon}
                             activeIcon={item.activeIcon}
                             label={item.label}
+                            href={item.href}
                         />
                     )
                 })}

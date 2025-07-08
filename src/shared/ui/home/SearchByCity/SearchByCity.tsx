@@ -102,7 +102,10 @@ const SearchByCity = ({ inputError }: SearchByCityProps) => {
                     </div>
                 </div>
 
-                <button className='default-hover-active'>
+                <button
+                    onClick={() => router.push('/notifications')}
+                    className='default-hover-active'
+                >
                     <svg
                         width='24'
                         height='24'

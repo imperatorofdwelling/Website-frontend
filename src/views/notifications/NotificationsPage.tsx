@@ -13,18 +13,20 @@ import RefundIcon from '@/public/images/notification/RefundIcon.svg'
 import NotificationsItems from '@/src/shared/ui/notifications/NotificationsItems/NotificationsItems'
 import EmptyNotifications from '@/src/shared/ui/notifications/EmptyNotifications/EmptyNotifications'
 import NotificationsDeleteAllModal from '@/src/shared/ui/notifications/NotificationsDeleteAllModal/NotificationsDeleteAllModal'
+import type { NotificationSection } from '@/src/shared/ui/notifications/NotificationsItems/NotificationsItems'
 
-const notifications = [
+const notifications: NotificationSection[] = [
     {
-        id: 1,
+        id: '1',
         date: 'Today',
         notifications: [
             {
-                id: 101,
+                id: '101',
                 type: 'deleted',
             },
             {
-                id: 102,
+                id: '102',
+                type: 'other',
                 title: 'Booking confirmation',
                 hotelName: 'Hotel Moonlight',
                 location: 'st. Star, 12',
@@ -34,7 +36,8 @@ const notifications = [
                 icon: TickIcon,
             },
             {
-                id: 103,
+                id: '103',
+                type: 'other',
                 title: 'Your booking cancelled',
                 hotelName: 'Riviera Retreat',
                 location: 'st. Star, 12',
@@ -44,7 +47,7 @@ const notifications = [
                 icon: CrossIcon,
             },
             {
-                id: 104,
+                id: '104',
                 type: 'check-in',
                 image: BedroomImg3,
                 title: 'Check-in soon!',
@@ -57,11 +60,11 @@ const notifications = [
         ],
     },
     {
-        id: 2,
+        id: '2',
         date: 'Yesterday',
         notifications: [
             {
-                id: 201,
+                id: '201',
                 type: 'check-in',
                 image: BedroomImg3,
                 title: 'Your stay will end soon!',
@@ -71,7 +74,7 @@ const notifications = [
                 icon: CheckInIcon,
             },
             {
-                id: 202,
+                id: '202',
                 type: 'message',
                 image: Profile,
                 hotelName: 'Hotel Moonlight',
@@ -81,7 +84,7 @@ const notifications = [
                 icon: Hotel3Icon,
             },
             {
-                id: 203,
+                id: '203',
                 type: 'booking_cancelled',
                 image: BedroomImg1,
                 title: 'Booking cancelled',
@@ -94,11 +97,12 @@ const notifications = [
         ],
     },
     {
-        id: 3,
+        id: '3',
         date: '14 August',
         notifications: [
             {
-                id: 301,
+                id: '301',
+                type: 'other',
                 title: 'Booking dates updated',
                 hotelName: 'Hotel Moonlight',
                 location: 'st. Star, 12',
@@ -108,7 +112,7 @@ const notifications = [
                 icon: TickIcon,
             },
             {
-                id: 302,
+                id: '302',
                 type: 'message',
                 image: Profile,
                 hotelName: 'Hotel Moonlight',
@@ -118,7 +122,7 @@ const notifications = [
                 icon: Hotel3Icon,
             },
             {
-                id: 303,
+                id: '303',
                 type: 'refund',
                 image: BedroomImg1,
                 title: 'Refund of funds',
@@ -150,3 +154,5 @@ export function NotificationsPageUi() {
         </div>
     )
 }
+
+export { NotificationsPageUi as default }

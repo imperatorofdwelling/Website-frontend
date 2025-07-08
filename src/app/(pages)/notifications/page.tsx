@@ -1,1 +1,1 @@
-export {NotificationsPageUi as default} from "@/src/views/notifications/NotificationsPage"
+export { NotificationsPageUi as default } from '@/src/views/notifications/NotificationsPage'
