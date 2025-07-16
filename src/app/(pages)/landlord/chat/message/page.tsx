@@ -1,0 +1,1 @@
+export {MessagePageUi as default} from "@/src/views/landlord/chat/MessagePage"

@@ -10,6 +10,7 @@ interface HeaderProps {
     leftContent?: ReactNode
     rightContent?: ReactNode
     onClick?: () => void
+    subTitle?: string
 }
 
 export const Header = ({
@@ -18,6 +19,7 @@ export const Header = ({
     leftContent,
     rightContent,
     onClick,
+    subTitle
 }: HeaderProps) => {
     const router = useRouter()
     const [isMounted, setIsMounted] = useState(false)
@@ -44,9 +46,11 @@ export const Header = ({
                 )}
                 {leftContent && <div>{leftContent}</div>}
             </div>
+<div>
 
             <h2 className='text-lg font-medium'>{title}</h2>
-
+            <h5 className='text-xs text-[#757575] text-center'>{subTitle}</h5>
+</div>
             <div>{rightContent}</div>
         </header>
     )
