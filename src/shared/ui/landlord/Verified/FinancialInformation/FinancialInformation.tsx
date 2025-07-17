@@ -2,6 +2,7 @@
 
 import { BarChart, Bar, XAxis, ResponsiveContainer, Cell } from 'recharts'
 import { useState } from 'react'
+import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart'
 
 const currentMonthIndex = new Date().getMonth()
 
@@ -35,12 +36,12 @@ const FinancialInformation = () => {
     const totalYearlyValue =
         data.reduce((sum, item) => sum + item.value, 0) * 100
 
-    const handleClick = (e: any) => {
-        const index = data.findIndex((item) => item.name === e.activeLabel)
-        if (index !== -1) {
-            setSelectedMonthIndex(index)
+        const handleClick = (e: CategoricalChartState) => {
+            const index = data.findIndex((item) => item.name === e.activeLabel)
+            if (index !== -1) {
+                setSelectedMonthIndex(index)
+            }
         }
-    }
 
     const selectedMonth =
         selectedMonthIndex !== null ? data[selectedMonthIndex] : null

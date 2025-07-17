@@ -3,9 +3,8 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { Header } from '@/src/shared/ui/components/Header'
-import ArchiveIcon from '@/public/images/landlord/chat/Archive.svg'
 import SearchIcon from '@/public/images/SvgIcons/SearchIcon.svg'
-
+import { StaticImageData } from 'next/image'
 import { ChatCard } from '@/src/shared/ui/landlord/chat/ChatCard'
 import { chatData as initialChatData } from '@/src/shared/utils/chatMockData'
 import { ChatOptionsModal } from '@/src/shared/ui/landlord/chat/ChatOptionsModal'
@@ -16,7 +15,7 @@ type Chat = {
     name: string
     date: string
     description: string
-    image: any
+    image: string | StaticImageData
     isPinned: boolean
     isUnread: boolean
     unreadCount: number

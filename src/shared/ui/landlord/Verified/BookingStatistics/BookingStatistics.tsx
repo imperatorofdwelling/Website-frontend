@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Calendar from '@/public/images/landlord/Calendar.svg'
 import Building from '@/public/images/landlord/Building.svg'
 
@@ -16,12 +16,15 @@ const circumference = 2 * Math.PI * radius
 
 const BookingStatistics = () => {
     const totalPercent = rawData.reduce((sum, d) => sum + d.percent, 0)
-    const remainingPercent = 100 - totalPercent
+    // const remainingPercent = 100 - totalPercent
 
-    const data = [
-        ...rawData,
-        { label: 'Remaining', percent: remainingPercent, color: '#222225' },
-    ]
+    const data = useMemo(() => {
+        const remainingPercent = 100 - rawData.reduce((sum, d) => sum + d.percent, 0)
+        return [
+            ...rawData,
+            { label: 'Remaining', percent: remainingPercent, color: '#222225' },
+        ]
+    }, [])
 
     const [animatedArcs, setAnimatedArcs] = useState<number[]>([])
     const [tooltip, setTooltip] = useState<{
@@ -46,7 +49,7 @@ const BookingStatistics = () => {
                 setAnimatedArcs((prev) => [...prev, i])
             }, i * 400)
         })
-    }, [])
+    }, [data])
 
     return (
         <div className='border-b border-[#222225] pb-8'>
@@ -66,7 +69,7 @@ const BookingStatistics = () => {
                                 {(() => {
                                     let cumulativePercent = 0
                                     return data.map((slice, index) => {
-                                        const percent = slice.percent / 100
+                                        // const percent = slice.percent / 100
                                         const dashArray = circumference
                                         const offset =
                                             circumference *

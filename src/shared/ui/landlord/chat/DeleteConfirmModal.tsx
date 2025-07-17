@@ -43,7 +43,7 @@ export function DeleteConfirmModal({ onClose, onConfirm }: DeleteConfirmModalPro
                             onClick={onConfirm}
                             className='bg-[#006BE6] text-white text-sm default-hover-active py-2 rounded-lg font-medium'
                         >
-                            Yes, I'm sure
+                            Yes, I&apos;m sure
                         </button>
                         <button
                             onClick={onClose}

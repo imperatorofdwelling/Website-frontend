@@ -10,13 +10,14 @@ import { ChatCard } from '@/src/shared/ui/landlord/chat/ChatCard'
 import { chatData as initialChatData } from '@/src/shared/utils/chatMockData'
 import { ChatOptionsModal } from '@/src/shared/ui/landlord/chat/ChatOptionsModal'
 import { DeleteConfirmModal } from '@/src/shared/ui/landlord/chat/DeleteConfirmModal'
+import { StaticImageData } from 'next/image'
 
 type Chat = {
     id: number
     name: string
     date: string
     description: string
-    image: any
+    image: string | StaticImageData
     isPinned: boolean
     isUnread: boolean
     unreadCount: number

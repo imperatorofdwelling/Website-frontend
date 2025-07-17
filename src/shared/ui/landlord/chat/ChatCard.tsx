@@ -4,12 +4,13 @@ import React from 'react'
 import Image from 'next/image'
 import PinIcon from '@/public/images/landlord/chat/Pin.svg'
 import LiveChatIcon from '@/public/images/landlord/chat/LiveChat.svg'
+import { StaticImageData } from 'next/image'
 
 type ChatCardProps = {
     name: string
     date: string
     description: string
-    image: any
+    image: string | StaticImageData
     isPinned: boolean
     isUnread: boolean
     unreadCount: number

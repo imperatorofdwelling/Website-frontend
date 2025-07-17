@@ -43,6 +43,15 @@ export function MessageMenu({
     onReply,
     onForward,
 }: MessageMenuProps) {
+
+    useEffect(() => {
+        document.body.classList.add('overflow-hidden')
+    
+        return () => {
+            document.body.classList.remove('overflow-hidden')
+        }
+    }, [])
+    
     if (!message) return null
 
     const options = [
@@ -81,14 +90,6 @@ export function MessageMenu({
         },
     ]
 
-    useEffect(() => {
-        document.body.classList.add('overflow-hidden')
-    
-        return () => {
-            document.body.classList.remove('overflow-hidden')
-        }
-    }, [])
-    
 
     return createPortal(
         <div className='fixed inset-0 z-50 bg-white/10' onClick={onClose}>

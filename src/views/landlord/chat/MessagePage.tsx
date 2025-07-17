@@ -38,12 +38,12 @@ export function MessagePageUi() {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value)
-      }
-    
-      const handleSend = () => {
+    }
+
+    const handleSend = () => {
         if (!inputValue.trim()) return
         setInputValue('')
-      }
+    }
     return (
         <div className='min-h-screen flex flex-col text-whitegap-4   pb-[100px] relative'>
             <Header back title='Name Surname' subTitle='Online' />
@@ -75,7 +75,15 @@ export function MessagePageUi() {
             </div>
 
             <div className='flex-1 overflow-y-auto px-4 py-4'>
-                <ChatMessages messages={messages} />
+                {messages.length === 0 ? (
+                    <div className='flex justify-center items-center h-full'>
+                        <div className='p-[14px] border border-[#222225] rounded-lg text-sm text-[#757575]'>
+                            No messages here yet. Start the conversation
+                        </div>
+                    </div>
+                ) : (
+                    <ChatMessages messages={messages} />
+                )}
             </div>
 
             <div className='w-full px-[16px] py-[8px] flex items-center gap-2 sticky bottom-0 bg-[#131313]'>
