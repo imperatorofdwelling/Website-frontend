@@ -1,0 +1,1 @@
+export {OnbordingPageUi as default} from "@/src/views/landlord/advert/OnbordingPage"
