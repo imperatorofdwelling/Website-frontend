@@ -62,9 +62,9 @@ export function OnbordingPageUi() {
                 ))}
             </div>
 
-            <div className='mt-auto pb-4'>
-                <button className='w-full px-4 py-4 text-base font-semibold text-white bg-blue rounded-lg min-h-[56px] default-hover-active mb-2'>
-                    Yes, I am sure
+            <div className='mt-auto'>
+                <button className='w-full px-4 py-4 text-base font-semibold text-white bg-blue rounded-lg min-h-[56px] default-hover-active'>
+                Get started
                 </button>
             </div>
         </div>
