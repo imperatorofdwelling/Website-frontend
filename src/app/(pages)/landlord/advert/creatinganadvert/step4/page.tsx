@@ -1,0 +1,1 @@
+export {Step4PageUi as default} from "@/src/views/landlord/advert/CreatingAnAdvert/Step4"
