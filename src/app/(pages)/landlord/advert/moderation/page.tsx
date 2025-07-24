@@ -1,0 +1,1 @@
+export {ModerationPageUi as default} from "@/src/views/landlord/advert/ModerationPage"

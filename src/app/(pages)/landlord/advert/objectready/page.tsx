@@ -1,0 +1,1 @@
+export {ObjectReadyPageUi as default} from "@/src/views/landlord/advert/ObjectReadyPage"
