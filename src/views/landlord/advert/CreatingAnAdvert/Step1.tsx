@@ -18,6 +18,7 @@ import StepIndicator from '@/src/shared/ui/landlord/Advert/StepIndicator'
 import BookingPeriod from '@/src/shared/ui/landlord/Advert/BookingPeriod'
 import SelectTypeOfBedsModal from '@/src/shared/ui/landlord/Advert/SelectTypeOfBeds'
 import TimePicker from '@/src/shared/ui/landlord/Advert/TimePicker'
+import { useRouter } from 'next/navigation'
 
 const propertyTypes = [
     { label: 'House', icon: <HomeIcon /> },
@@ -31,6 +32,7 @@ const bedsOptions = [1, 2, 3, 4, 5, '6+']
 const amenityOptions = ['Wi-fi', 'Air conditioner', 'Pets allowed']
 
 export function Step1PageUi() {
+    const router = useRouter()
     const [title, setTitle] = useState('Hotel Moonlight')
     const [selectedType, setSelectedType] = useState('House')
     const [approach, setApproach] = useState('')
@@ -354,7 +356,10 @@ export function Step1PageUi() {
                 </button>
             </div>
 
-            <button className='w-full bg-[#006BE6] py-4 text-base font-semibold rounded-lg mt-6 default-hover-active'>
+            <button 
+              onClick={() =>
+                router.push('/landlord/advert/creatinganadvert/step2')
+            } className='w-full bg-[#006BE6] py-4 text-base font-semibold rounded-lg mt-6 default-hover-active'>
                 Continue
             </button>
         </div>

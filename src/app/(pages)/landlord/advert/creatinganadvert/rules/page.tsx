@@ -1,0 +1,1 @@
+export {RulesPageUi as default} from "@/src/views/landlord/advert/CreatingAnAdvert/RulesPage"
