@@ -1,0 +1,1 @@
+export {RateTenantPageUi as default} from '@/src/views/landlord/confirmation/RateTenantPage'

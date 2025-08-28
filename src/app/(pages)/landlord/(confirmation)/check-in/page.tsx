@@ -1,0 +1,1 @@
+export {CheckInPageUi as default} from '@/src/views/landlord/confirmation/CheckInPage'

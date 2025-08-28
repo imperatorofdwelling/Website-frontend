@@ -12,7 +12,7 @@ export function ObjectReadyPageUi() {
                 Your objects is ready!
                 </h2>
                 <p className='text-sm text-[#757575] text-center'>
-                Go to the "My Objects" section <br/>
+                Go to the &quot;My Objects&quot; section <br/>
                 and view all your adverts
                 </p>
             </div>

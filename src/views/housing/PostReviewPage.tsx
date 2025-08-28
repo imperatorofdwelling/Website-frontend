@@ -9,7 +9,8 @@ import BillFadeIcon from '@/public/images/housing/BillFadeIcon.svg'
 import ActiveStarIcon from '@/public/images/SvgIcons/ActiveStarIcon.svg'
 import FillStartIcon from '@/public/images/SvgIcons/FillStartIcon.svg'
 import PlusIcon from '@/public/images/SvgIcons/PlusIcon.svg'
-import { Image } from 'next/image'
+import Image from 'next/image'
+
 
 export function PostReviewPageUi() {
     const [rating, setRating] = useState(0)
@@ -88,18 +89,20 @@ export function PostReviewPageUi() {
                             </label>
                         )}
 
-                        {uploadedImages.map((image, index) => (
-                            <div
-                                key={index}
-                                className='h-[90px] w-[90px] rounded-lg border border-[#1B1B1C] flex items-center justify-center bg-[#131313] shrink-0 overflow-hidden'
-                            >
-                                <Image
-                                    src={image}
-                                    alt='Uploaded'
-                                    className='w-full h-full object-cover rounded-lg'
-                                />
-                            </div>
-                        ))}
+{uploadedImages.map((image, index) => (
+  <div
+    key={index}
+    className="relative h-[90px] w-[90px] rounded-lg border border-[#1B1B1C] overflow-hidden bg-[#131313]"
+  >
+    <Image
+      src={image}
+      alt="Uploaded"
+      fill
+      className="object-cover rounded-lg"
+    />
+  </div>
+))}
+
                     </div>
                     <h5 className='text-sm text-[#757575] mt-2'>
                         Maximum of 5 photos

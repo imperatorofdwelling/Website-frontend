@@ -7,6 +7,7 @@ import StepIndicator from '@/src/shared/ui/landlord/Advert/StepIndicator'
 import PlusIcon from '@/public/images/landlord/advert/PlusIcon.svg'
 import clsx from 'clsx'
 import RulesDrawer from '@/src/shared/ui/landlord/Advert/RulesDrawer'
+import Image from 'next/image'
 
 export function Step2PageUi() {
     const [photos, setPhotos] = useState<File[]>([])
@@ -65,7 +66,7 @@ export function Step2PageUi() {
                                     key={idx}
                                     className='relative w-[90px] h-[90px] rounded-md overflow-hidden border border-[#1B1B1C] shrink-0'
                                 >
-                                    <img
+                                    <Image
                                         src={URL.createObjectURL(file)}
                                         alt={`photo-${idx}`}
                                         className='object-cover w-full h-full'

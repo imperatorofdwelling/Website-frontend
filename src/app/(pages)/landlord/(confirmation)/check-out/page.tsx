@@ -1,0 +1,1 @@
+export {CheckOutPageUi as default} from '@/src/views/landlord/confirmation/CheckOutPage'

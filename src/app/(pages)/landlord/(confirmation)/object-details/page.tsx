@@ -1,0 +1,1 @@
+export {ObjectDetailsPageUi as default} from '@/src/views/landlord/confirmation/ObjectDetailsPage'
