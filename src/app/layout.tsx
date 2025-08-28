@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import '@/src/shared/styles/globals.css'
-import UIProvider from '@/src/shared/Providers/UIProvider'
-import { Toaster } from 'react-hot-toast'
+import Providers from './providers'
 
 const geistSans = localFont({
     src: '../shared/fonts/GeistVF.woff',
@@ -22,26 +21,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
-}: Readonly<{
+}: {
     children: React.ReactNode
-}>) {
+}) {
     return (
-        <html lang="en">
+        <html lang='en'>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <UIProvider>
-                    {children}
-                    <Toaster
-                    position="top-center"
-                    toastOptions={{
-                        style: {
-                            background: '#333',
-                            color: '#fff',
-                        },
-                    }}
-                />
-                </UIProvider>
+                <Providers>{children}</Providers>
             </body>
         </html>
     )
