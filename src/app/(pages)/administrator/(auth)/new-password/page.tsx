@@ -1,0 +1,1 @@
+export {NewPasswordPageUi as default} from '@/src/views/administrator/auth/NewPasswordPage'

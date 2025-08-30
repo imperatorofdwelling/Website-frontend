@@ -1,0 +1,1 @@
+export {VerifyCodePageUi as default} from '@/src/views/administrator/auth/VerifyCodePage'

@@ -1,0 +1,1 @@
+export {ForgotPasswordPageUi as default} from '@/src/views/administrator/auth/ForgotPasswordPage'

@@ -1,0 +1,1 @@
+export {ChangePasswordSuccessfulPageUi as default} from '@/src/views/administrator/auth/ChangePasswordSuccessfulPage'

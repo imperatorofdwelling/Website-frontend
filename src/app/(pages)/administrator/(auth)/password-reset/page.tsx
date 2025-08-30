@@ -1,0 +1,1 @@
+export {PasswordResetPageUi as default} from '@/src/views/administrator/auth/PasswordResetPage'
