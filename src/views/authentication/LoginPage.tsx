@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import Image from 'next/image'
 import GoogleLogo from '@/public/images/login/googleLogo.svg'
@@ -20,12 +20,13 @@ export function LoginPageUi() {
         name: '', // This can be removed in the login form
     })
     const [selectedRole, setSelectedRole] = useState<'tenant' | 'landlord'>(
-        'tenant',
+        'tenant'
     ) // Track selected role
 
     const { handleSubmit, errors, loading } = useFormHandler({
         formData,
         endpoint: 'login',
+        selectedRole,
     })
 
     const handleChange = (key: string, value: string) => {
@@ -38,27 +39,27 @@ export function LoginPageUi() {
     ]
 
     return (
-        <main className="w-full flex overflow-hidden flex-col pb-3">
-            <section className="flex flex-col justify-center w-full">
-                <div className="flex justify-between items-center">
+        <main className='w-full flex overflow-hidden flex-col pb-3'>
+            <section className='flex flex-col justify-center w-full'>
+                <div className='flex justify-between items-center'>
                     <Image
                         src={AuthLogo}
                         width={64}
                         height={64}
-                        alt="Sign Up Logo"
-                        className="object-contain aspect-square"
+                        alt='Sign Up Logo'
+                        className='object-contain aspect-square'
                     />
                     <Link
-                        href="/"
-                        className="text-[#1DA1F2] default-hover-active"
+                        href='/'
+                        className='text-[#1DA1F2] default-hover-active'
                     >
                         Skip
                     </Link>
                 </div>
-                <h1 className="mt-[104px] text-5xl font-bold text-white">
+                <h1 className='mt-[104px] text-5xl font-bold text-white'>
                     Sign In
                 </h1>
-                <div className="w-full bg-grey flex justify-evenly mt-4">
+                <div className='w-full bg-grey flex justify-evenly mt-4'>
                     <button
                         className={`w-1/2 py-[9px] rounded-[7px] default-hover-active ${
                             selectedRole === 'tenant'
@@ -81,10 +82,10 @@ export function LoginPageUi() {
                     </button>
                 </div>
                 <form
-                    className="flex flex-col mt-6 w-full"
+                    className='flex flex-col mt-6 w-full'
                     onSubmit={handleSubmit}
                 >
-                    <div className="mb-5">
+                    <div className='mb-5'>
                         {inputFields.map((field, index) => (
                             <div key={index}>
                                 <InputField
@@ -96,27 +97,27 @@ export function LoginPageUi() {
                                     }
                                 />
                                 {errors[field.key] && (
-                                    <p className="text-red text-sm mt-1 capitalize pl-4">
+                                    <p className='text-red text-sm mt-1 capitalize pl-4'>
                                         {errors[field.key]}
                                     </p>
                                 )}
                             </div>
                         ))}
                     </div>
-                    <div className="flex items-center gap-2 mb-5 pl-1">
+                    <div className='flex items-center gap-2 mb-5 pl-1'>
                         <DefaultCheckBox
-                            type="checkbox"
-                            name="conditions"
+                            type='checkbox'
+                            name='conditions'
                             key={'conditions'}
-                            value="conditions"
+                            value='conditions'
                             onChange={() => ''}
                         />
 
-                        <p className="text-sm text-[#666666] ">
+                        <p className='text-sm text-[#666666] '>
                             I read and agree to{' '}
                             <Link
                                 href={'#'}
-                                className="text-blue font-medium default-hover-active"
+                                className='text-blue font-medium default-hover-active'
                             >
                                 Terms and Conditions
                             </Link>
@@ -127,22 +128,22 @@ export function LoginPageUi() {
                         disabled={loading}
                     />
                 </form>
-                <div className="flex gap-2 justify-center items-center mt-6 w-full text-xs leading-none text-center text-white whitespace-nowrap">
-                    <Link href={'#'} className="default-hover-active">
+                <div className='flex gap-2 justify-center items-center mt-6 w-full text-xs leading-none text-center text-white whitespace-nowrap'>
+                    <Link href={'#'} className='default-hover-active'>
                         <GoogleLogo />
                     </Link>
-                    <span className="self-stretch my-auto text-sm">Or</span>
-                    <Link href={'#'} className="default-hover-active">
+                    <span className='self-stretch my-auto text-sm'>Or</span>
+                    <Link href={'#'} className='default-hover-active'>
                         <TwitterLogo />
                     </Link>
                 </div>
-                <p className="self-start mt-6 text-sm text-center w-full">
-                    <span className="text-stone-300">
+                <p className='self-start mt-6 text-sm text-center w-full'>
+                    <span className='text-stone-300'>
                         Don&apos;t have an account
                     </span>{' '}
                     <Link
-                        href="/registration"
-                        className="font-medium text-sky-500"
+                        href='/registration'
+                        className='font-medium text-sky-500'
                     >
                         Sign up
                     </Link>

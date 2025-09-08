@@ -105,25 +105,25 @@ export default function BottomMenuBar() {
             label: 'Home',
             href: '/',
         },
-        // ...(userRole === 'landlord'
-        //     ? [
-        {
-            id: 3,
-            defaultIcon: <ObjectDefaultIcon className='w-6 h-6' />,
-            activeIcon: <ObjectActiveIcon className='w-6 h-6' />,
-            label: 'My objects',
-            href: '/landlord/my-objects',
-        },
-        //   ]
-        // : [
-        //       {
-        //           id: 2,
-        //           defaultIcon: <FavoritesDefaultIcon className='w-6 h-6' />,
-        //           activeIcon: <FavoritesActiveIcon className='w-6 h-6' />,
-        //           label: 'Favorites',
-        //           href: '/favorites',
-        //       },
-        //   ]),
+        ...(userRole === 'landlord'
+            ? [
+                  {
+                      id: 3,
+                      defaultIcon: <ObjectDefaultIcon className='w-6 h-6' />,
+                      activeIcon: <ObjectActiveIcon className='w-6 h-6' />,
+                      label: 'My objects',
+                      href: '/landlord/my-objects',
+                  },
+              ]
+            : [
+                  {
+                      id: 2,
+                      defaultIcon: <FavoritesDefaultIcon className='w-6 h-6' />,
+                      activeIcon: <FavoritesActiveIcon className='w-6 h-6' />,
+                      label: 'Favorites',
+                      href: '/favorites',
+                  },
+              ]),
         {
             id: 4,
             defaultIcon: <MessageDefaultIcon className='w-6 h-6' />,

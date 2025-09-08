@@ -10,6 +10,7 @@ import ImageUploadPopUp from './ImageUploadPopUp/ImageUploadPopUp'
 import { BASE_URL } from '@/src/shared/utils/ky'
 import LogOutModal from './LogOutModal/LogOutModal'
 import { useRouter } from 'next/navigation'
+import { useAuth } from '@/src/shared/contexts/AuthContext'
 
 interface User {
     id: string
@@ -40,6 +41,7 @@ interface SectionProps {
 
 export default function LandlordProfile() {
     const router = useRouter()
+    const { user } = useAuth()
     const [userData, setUserData] = useState<User | null>(null)
     const [, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
@@ -90,8 +92,13 @@ export default function LandlordProfile() {
     }
 
     useEffect(() => {
-        getUser()
-    }, [])
+        if (user) {
+            setUserData(user)
+            setLoading(false)
+        } else {
+            setLoading(false)
+        }
+    }, [user])
 
     const renderSection = ({ title, icon, keyName, items }: SectionProps) => (
         <div className='border-b pb-6 border-[#131313]'>

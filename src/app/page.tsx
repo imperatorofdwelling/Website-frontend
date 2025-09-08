@@ -27,13 +27,16 @@ export default function Home() {
             if (locationId) {
                 url = `stays/location/${locationId}`
             }
+            console.log({ url })
             const response = await BASE_URL.get(url).json<{ data: Stay[] }>()
+            console.log({ response })
             setStays(response.data || [])
         } catch (error) {
             console.error('Failed to fetch stays:', error)
             setStays([])
         } finally {
             setLoading(false)
+            console.log('finally')
         }
     }
 

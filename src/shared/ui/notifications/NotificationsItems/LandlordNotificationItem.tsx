@@ -8,16 +8,16 @@ import VerifiedModal from '../LandlordModals/VerifiedModal/VerifiedModal'
 import NotVerifiedModal from '../LandlordModals/NotVerifiedModal/NotVerifiedModal'
 import PaymentsSuspendedModal from '../LandlordModals/PaymentsSuspendedModal/PaymentsSuspendedModal'
 import AccountUnblockedModal from '../LandlordModals/AccountUnblockedModal/AccountUnblockedModal'
-// import BlockingWarningModal from '../LandlordModals/BlockingWarningModal/BlockingWarningModal'
-// import AccountBlockingModal from '../LandlordModals/AccountBlockingModal/AccountBlockingModal'
-// import AdditionalVerificationModal from '../LandlordModals/AdditionalVerificationModal/AdditionalVerificationModal'
-// import BookingCancelledModal from '../LandlordModals/BookingCancelledModal/BookingCancelledModal'
+import BlockingWarningModal from '../LandlordModals/BlockingWarningModal/BlockingWarningModal'
+import AccountBlockingModal from '../LandlordModals/AccountBlockingModal/AccountBlockingModal'
+import AdditionalVerificationModal from '../LandlordModals/AdditionalVerificationModal/AdditionalVerificationModal'
+import BookingCancelledModal from '../LandlordModals/BookingCancelledModal/BookingCancelledModal'
+import NewReviewModal from '../LandlordModals/NewReviewModal/NewReviewModal'
+import DateChangesModal from '../LandlordModals/DateChangesModal/DateChangesModal'
+import LeaveAReviewModal from '../LandlordModals/LeaveAReviewModal/LeaveAReviewModal'
 import NewBookingModal from '../LandlordModals/NewBookingModal/NewBookingModal'
 import PublishedObjectModal from '../LandlordModals/PublishedObjectModal/PublishedObjectModal'
 import UrgentCheckinModal from '../LandlordModals/UrgentCheckinModal/UrgentCheckinModal'
-// import NewReviewModal from '../LandlordModals/NewReviewModal/NewReviewModal'
-// import DateChangesModal from '../LandlordModals/DateChangesModal/DateChangesModal'
-// import LeaveAReviewModal from '../LandlordModals/LeaveAReviewModal/LeaveAReviewModal'
 
 const SWIPE_THRESHOLD = 120
 
@@ -247,34 +247,34 @@ const LandlordNotificationItem: React.FC<LandlordNotificationItemProps> = ({
                     notification={notification}
                 />
             )}
-            {/* {modalOpen && activeModal === 'blocking_warning' && (
+            {modalOpen && activeModal === 'blocking_warning' && (
                 <BlockingWarningModal
                     open={modalOpen}
                     onClose={() => setModalOpen(false)}
                     notification={notification}
                 />
-            )} */}
-            {/* {modalOpen && activeModal === 'account_blocking' && (
+            )}
+            {modalOpen && activeModal === 'account_blocking' && (
                 <AccountBlockingModal
                     open={modalOpen}
                     onClose={() => setModalOpen(false)}
                     notification={notification}
                 />
-            )} */}
-            {/* {modalOpen && activeModal === 'additional_verification' && (
+            )}
+            {modalOpen && activeModal === 'additional_verification' && (
                 <AdditionalVerificationModal
                     open={modalOpen}
                     onClose={() => setModalOpen(false)}
                     notification={notification}
                 />
-            )} */}
-            {/* {modalOpen && activeModal === 'booking_cancelled' && (
+            )}
+            {modalOpen && activeModal === 'booking_cancelled' && (
                 <BookingCancelledModal
                     open={modalOpen}
                     onClose={() => setModalOpen(false)}
                     notification={notification}
                 />
-            )} */}
+            )}
             {modalOpen && activeModal === 'new_booking' && (
                 <NewBookingModal
                     open={modalOpen}
@@ -296,7 +296,7 @@ const LandlordNotificationItem: React.FC<LandlordNotificationItemProps> = ({
                     notification={notification}
                 />
             )}
-            {/* {modalOpen && activeModal === 'new_review' && (
+            {modalOpen && activeModal === 'new_review' && (
                 <NewReviewModal
                     open={modalOpen}
                     onClose={() => setModalOpen(false)}
@@ -316,7 +316,7 @@ const LandlordNotificationItem: React.FC<LandlordNotificationItemProps> = ({
                     onClose={() => setModalOpen(false)}
                     notification={notification}
                 />
-            )} */}
+            )}
         </>
     )
 }

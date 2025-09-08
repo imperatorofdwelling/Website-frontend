@@ -2,10 +2,17 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { BASE_URL, HTTPError } from '@/src/shared/utils/ky'
 import { FormData } from '@/src/shared/types/InputFormType'
+import { signIn } from 'next-auth/react'
+
+// Add role to FormData type for clarity
+interface ExtendedFormData extends FormData {
+    role?: 'tenant' | 'landlord'
+}
 
 type HandleSubmitParams = {
-    formData: FormData
+    formData: ExtendedFormData
     endpoint: 'login' | 'registration'
+    selectedRole?: 'tenant' | 'landlord'
 }
 
 type UseFormHandler = {
@@ -27,6 +34,7 @@ const ERROR_MESSAGES = {
 export const useFormHandler = ({
     formData,
     endpoint,
+    selectedRole,
 }: HandleSubmitParams): UseFormHandler => {
     const router = useRouter()
     const [errors, setErrors] = useState<Record<string, string>>({})
@@ -55,19 +63,56 @@ export const useFormHandler = ({
         }
 
         try {
-            const requestBody = {
-                ...(endpoint === 'registration' && { name: formData.name }),
-                email: formData.email,
-                password: formData.password,
-                isHashed: true,
+            const role = formData.role || selectedRole || 'tenant'
+            if (endpoint === 'login') {
+                // Use NextAuth signIn for login
+                const result = await signIn('credentials', {
+                    redirect: false,
+                    email: formData.email,
+                    password: formData.password,
+                    role,
+                })
+                console.log({ result })
+                if (result?.error) {
+                    setErrors({ general: ERROR_MESSAGES.WRONG_PASSWORD })
+                } else {
+                    router.push('/')
+                    // // Redirect based on role
+                    // if (role === 'tenant') {
+                    //     router.push('/tenant/dashboard')
+                    // } else {
+                    //     router.push('/landlord/dashboard')
+                    // }
+                }
+            } else if (endpoint === 'registration') {
+                // Call registration API as before
+                const requestBody = {
+                    name: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                    isHashed: true,
+                    // role,
+                }
+                const response = await BASE_URL.post(endpoint, {
+                    json: requestBody,
+                }).json()
+                // On success, auto-login
+                const loginResult = await signIn('credentials', {
+                    redirect: false,
+                    email: formData.email,
+                    password: formData.password,
+                    role,
+                })
+                if (loginResult?.error) {
+                    setErrors({ general: ERROR_MESSAGES.WRONG_PASSWORD })
+                } else {
+                    if (role === 'tenant') {
+                        router.push('/tenant/dashboard')
+                    } else {
+                        router.push('/landlord/dashboard')
+                    }
+                }
             }
-
-            const response = await BASE_URL.post(endpoint, {
-                json: requestBody,
-            }).json()
-
-            localStorage.setItem('user', JSON.stringify(response))
-            router.push('/')
         } catch (error) {
             let apiErrors: Record<string, string> = {}
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { AlertCircle } from 'lucide-react'
 
 type AccountBlockingModalProps = {
     open: boolean
@@ -13,19 +14,28 @@ export default function AccountBlockingModal({
 }: AccountBlockingModalProps) {
     if (!open) return null
     return (
-        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/60'>
-            <div className='bg-[#18181A] rounded-2xl p-8 min-w-[320px] min-h-[180px] flex flex-col items-center'>
-                <h3 className='text-white text-lg font-bold mb-4'>
-                    {notification.title}
-                </h3>
-                <p className='text-[#757575] text-sm mb-6'>
-                    {notification.description}
-                </p>
+        <div className='fixed inset-0 z-50 flex flex-col items-center justify-between bg-black text-white min-h-screen'>
+            <div className='flex flex-col items-center w-full pt-16'>
+                <div className='mb-6'>
+                    <div className='flex items-center justify-center mb-6'>
+                        <div className='bg-[#18181A] rounded-full w-20 h-20 flex items-center justify-center'>
+                            <AlertCircle size={48} color='#FF3B30' />
+                        </div>
+                    </div>
+                    <h3 className='text-2xl font-bold mb-2 text-center'>
+                        {notification.title}
+                    </h3>
+                    <p className='text-base text-white mb-6 text-center max-w-[80vw]'>
+                        {notification.description}
+                    </p>
+                </div>
+            </div>
+            <div className='w-full flex flex-col items-center pb-8'>
                 <button
-                    className='px-6 py-2 bg-blue-600 text-white rounded-lg mt-2'
+                    className='w-[90vw] max-w-md py-4 bg-white text-black rounded-lg font-semibold text-base'
                     onClick={onClose}
                 >
-                    Close
+                    Home page
                 </button>
             </div>
         </div>
