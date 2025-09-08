@@ -1,7 +1,7 @@
 import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
 
-const PUBLIC_PATHS = ['/', '/login', '/registration']
+const PUBLIC_PATHS = ['/', '/login', '/registration', '/admin/settings']
 
 export default withAuth(
     function middleware(req) {

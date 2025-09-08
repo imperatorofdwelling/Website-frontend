@@ -12,6 +12,7 @@ import MessageDefaultIcon from '@/public/images/SvgIcons/MessagesDefault.svg'
 import MessageActiveIcon from '@/public/images/SvgIcons/MessagesClicked.svg'
 import ProfileDefaultIcon from '@/public/images/SvgIcons/ProfileDefault.svg'
 import ProfileActiveIcon from '@/public/images/SvgIcons/ProfileClicked.svg'
+import SettingIcon from '@/public/images/user/SettingIcon.svg'
 import ObjectDefaultIcon from '@/public/images/SvgIcons/ObjectDefault.svg'
 import ObjectActiveIcon from '@/public/images/SvgIcons/ObjectClicked.svg'
 
@@ -67,6 +68,8 @@ function isMenuItemActive(label: string, pathname: string): boolean {
             return pathname === '/my-objects'
         case 'Profile':
             return pathname === '/profile'
+        case 'Settings':
+            return pathname === '/admin/settings'
         default:
             return false
     }
@@ -78,7 +81,9 @@ export default function BottomMenuBar() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const role = localStorage.getItem('userRole')
+        // Prefer role from NextAuth token if stored, but fallback to localStorage key used elsewhere
+        const role =
+            localStorage.getItem('userRole') || localStorage.getItem('role')
         setUserRole(role)
         setLoading(false)
     }, [])
@@ -131,13 +136,25 @@ export default function BottomMenuBar() {
             label: 'Messages',
             href: '/messages',
         },
-        {
-            id: 5,
-            defaultIcon: <ProfileDefaultIcon className='w-6 h-6' />,
-            activeIcon: <ProfileActiveIcon className='w-6 h-6' />,
-            label: 'Profile',
-            href: '/profile',
-        },
+        ...(userRole === 'administrator' || pathname.startsWith('/admin')
+            ? [
+                  {
+                      id: 5,
+                      defaultIcon: <SettingIcon className='w-6 h-6' />,
+                      activeIcon: <SettingIcon className='w-6 h-6' />,
+                      label: 'Settings',
+                      href: '/admin/settings',
+                  },
+              ]
+            : [
+                  {
+                      id: 5,
+                      defaultIcon: <ProfileDefaultIcon className='w-6 h-6' />,
+                      activeIcon: <ProfileActiveIcon className='w-6 h-6' />,
+                      label: 'Profile',
+                      href: '/profile',
+                  },
+              ]),
     ]
 
     return (
