@@ -1,0 +1,1 @@
+export {HomePageUi as default} from '@/src/views/administrator/HomePage'
