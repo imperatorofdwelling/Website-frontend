@@ -1,0 +1,1 @@
+export {CalendarPageUi as default} from '@/src/views/administrator/CalendarPage'

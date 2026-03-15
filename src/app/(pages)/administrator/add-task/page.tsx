@@ -1,0 +1,1 @@
+export {AddTaskPageUi as default} from '@/src/views/administrator/AddTaskPage'
