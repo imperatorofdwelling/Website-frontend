@@ -1,0 +1,1 @@
+export {CancellationLimitExceededPageUi as default} from '@/src/views/administrator/notifications/CancellationLimitExceededPage'

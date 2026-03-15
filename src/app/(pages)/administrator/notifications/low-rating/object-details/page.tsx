@@ -1,0 +1,1 @@
+export {ObjectDetailsPageUi as default} from '@/src/views/administrator/notifications/ObjectDetailsPage'

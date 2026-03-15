@@ -1,0 +1,1 @@
+export {LowRatingPageUi as default} from '@/src/views/administrator/notifications/LowRatingPage'

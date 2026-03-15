@@ -132,7 +132,7 @@ export function HomePageUi() {
                         <button onClick={handleCalendar}>
                             <CalendarIcon />
                         </button>
-                        <button>
+                        <button onClick={() => router.push('/administrator/notifications')}>
                             <BellIcon />
                         </button>
                     </div>
